@@ -88,9 +88,9 @@ export default function LandingPage() {
                 <p className="mx-auto max-w-[700px] text-white text-sm md:text-xl">
                   {/* Fun and engaging computer science classes for kids aged 7-14.
                   Build games, apps, and more! */}
-                  Learn the latest coding skills needed in today's job market
-                  such as JavaScript, React, Next.js and SQL as well as how to
-                  leverage AI technologies to help you build your next
+                  Learn the latest coding skills needed in today&apos;s job
+                  market such as JavaScript, React, Next.js and SQL as well as
+                  how to leverage AI technologies to help you build your next
                   startup/business idea.
                 </p>
               </div>
@@ -168,7 +168,7 @@ export default function LandingPage() {
                 </h2>
                 <p className="max-w-[600px] text-gray-600 text-sm md:text-xl/relaxed">
                   Our classes are designed to be fun, engaging, and educational.
-                  {/* Watch your child's confidence grow as they master new skills
+                  {/* Watch your child&apos;s confidence grow as they master new skills
                   and make new friends who share their passion for technology. */}
                 </p>
               </div>

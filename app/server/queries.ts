@@ -13,7 +13,7 @@ const transporter = nodemailer.createTransport({
 });
 
 export async function sendMail(email: string) {
-  const info = await transporter.sendMail({
+  await transporter.sendMail({
     from: process.env.EMAIL_FROM, // sender address
     to: process.env.EMAIL_FROM, // list of receivers
     subject: "New CS925 Interest Request", // Subject line

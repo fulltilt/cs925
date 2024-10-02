@@ -159,7 +159,7 @@ export default function LandingPage() {
             </div>
           </div>
         </section>
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-100">
+        {/* <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-100">
           <div className="container px-4 md:px-6 mx-auto">
             <div className="grid items-center gap-6 lg:grid-cols-2 lg:gap-12">
               <div className="space-y-4">
@@ -168,8 +168,7 @@ export default function LandingPage() {
                 </h2>
                 <p className="max-w-[600px] text-gray-600 text-sm md:text-xl/relaxed">
                   Our classes are designed to be fun, engaging, and educational.
-                  {/* Watch your child&apos;s confidence grow as they master new skills
-                  and make new friends who share their passion for technology. */}
+                  
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-4 lg:justify-end">
@@ -183,11 +182,11 @@ export default function LandingPage() {
                 >
                   Contact Us
                 </Button>
-                {/* <Button variant="outline">View Class Schedule</Button> */}
+                
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
         <section
           className="w-full py-12 md:py-24 lg:py-32 bg-white"
           id="contact"

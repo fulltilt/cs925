@@ -2,11 +2,13 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Laptop, Code, Brain, Rocket, Menu } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { CheckCircle, Laptop, Code, Brain, Rocket, Menu } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { sendMail } from "./server/queries";
+import SubscribeButton from "./components/SubscribeButton";
 
 export default function LandingPage() {
   const { toast } = useToast();
@@ -16,67 +18,6 @@ export default function LandingPage() {
 
   return (
     <div className="flex flex-col mx-auto min-h-screen">
-      <header className="px-4 lg:px-6 h-14 flex items-center justify-between">
-        <Link className="flex items-center justify-center" href="#">
-          <Laptop className="h-6 w-6 text-blue-600" />
-          <span className="ml-2 text-xl md:text-2xl font-bold text-gray-900">
-            CS 925
-          </span>
-        </Link>
-        <nav className="hidden md:flex gap-4 sm:gap-6">
-          {/* <Link
-            className="text-sm font-medium hover:underline underline-offset-4"
-            href="#"
-          >
-            Programs
-          </Link>
-          <Link
-            className="text-sm font-medium hover:underline underline-offset-4"
-            href="#"
-          >
-            About Us
-          </Link> 
-          <Link
-            className="text-sm font-medium hover:underline underline-offset-4"
-            href="#"
-          >
-            Contact
-          </Link> */}
-        </nav>
-        <Button
-          className="md:hidden"
-          variant="ghost"
-          size="icon"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          <Menu className="h-6 w-6" />
-          <span className="sr-only">Toggle menu</span>
-        </Button>
-      </header>
-      {isMenuOpen && (
-        <div className="md:hidden bg-white p-4">
-          <nav className="flex flex-col gap-4">
-            {/* <Link
-              className="text-sm font-medium hover:underline underline-offset-4"
-              href="#"
-            >
-              Programs
-            </Link>
-            <Link
-              className="text-sm font-medium hover:underline underline-offset-4"
-              href="#"
-            >
-              About Us
-            </Link>
-            <Link
-              className="text-sm font-medium hover:underline underline-offset-4"
-              href="#"
-            >
-              Contact
-            </Link> */}
-          </nav>
-        </div>
-      )}
       <main className="flex-1">
         <section className="w-full mx-auto py-12 md:py-24 lg:py-32 xl:py-48 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500">
           <div className="container px-4 md:px-6 mx-auto ">
@@ -85,13 +26,13 @@ export default function LandingPage() {
                 <h1 className="text-3xl font-bold tracking-tighter mx-auto sm:text-4xl md:text-5xl lg:text-6xl/none text-white">
                   Unlock Your Coding Potential
                 </h1>
-                <p className="mx-auto max-w-[700px] text-white text-sm md:text-xl">
+                <p className="mx-auto max-w-[700px] text-sm md:text-xl text-white">
                   {/* Fun and engaging computer science classes for kids aged 7-14.
                   Build games, apps, and more! */}
-                  Learn the latest coding skills needed in today&apos;s job
-                  market such as JavaScript, React, Next.js and SQL as well as
-                  how to leverage AI technologies to help you build your next
-                  startup/business idea.
+                  Learn the latest coding skills needed in today&apos;s market
+                  such as JavaScript, React, Next.js, SQL/NoSQL and Cloud as
+                  well as how to leverage AI to help you land your next job or
+                  build your next startup/business idea.
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
@@ -111,18 +52,18 @@ export default function LandingPage() {
                     className="bg-white text-blue-600 hover:bg-gray-100"
                     onClick={() =>
                       document
-                        .getElementById("contact")
+                        .getElementById("pricing")
                         ?.scrollIntoView({ behavior: "smooth" })
                     }
                   >
-                    Contact Us Now
+                    Get Started
                   </Button>
                 </div>
               </div>
             </div>
           </div>
         </section>
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-white">
+        <section className="w-full mx-auto py-12 md:py-24 lg:py-32 ">
           <div className="container px-4 md:px-6 mx-auto">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12">
               Why Choose CS 925?
@@ -131,16 +72,14 @@ export default function LandingPage() {
               <div className="flex flex-col items-center text-center">
                 <Code className="h-12 w-12 text-blue-600 mb-4" />
                 <h3 className="text-xl font-bold mb-2">Learn Real Coding</h3>
-                <p className="text-gray-600">
-                  Learn actual programming skills used in the industry.
-                </p>
+                <p>Learn actual programming skills used in the industry.</p>
               </div>
               <div className="flex flex-col items-center text-center">
                 <Brain className="h-12 w-12 text-purple-600 mb-4" />
                 <h3 className="text-xl font-bold mb-2">
                   Develop Problem-Solving Skills
                 </h3>
-                <p className="text-gray-600">
+                <p>
                   Enhance logical thinking and creativity through coding
                   challenges.
                 </p>
@@ -150,12 +89,73 @@ export default function LandingPage() {
                 <h3 className="text-xl font-bold mb-2">
                   Project-Based Learning
                 </h3>
-                <p className="text-gray-600">
+                <p>
                   {/* Create games, apps, and websites in a fun, interactive
                   environment. */}
                   Create apps and websites in a fun, interactive environment.
                 </p>
               </div>
+            </div>
+          </div>
+        </section>
+        <section
+          id="pricing"
+          className="w-full py-12 md:py-24 lg:py-32 bg-[#f7f7f7] dark:bg-black"
+        >
+          <div className="container mx-auto px-4 md:px-6">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-center mb-12">
+              Simple, Transparent Pricing
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {[
+                {
+                  name: "Basic",
+                  price: "FREE",
+                  features: ["HTML/CSS/JS Foundations", "Misc Free Modules"],
+                  priceId: null,
+                },
+                {
+                  name: "Pro",
+                  price: "$49 / month",
+                  priceNote: "(normally $99)",
+                  features: [
+                    "Access to All Modules",
+                    "Discord Server Access",
+                    "Q&A Support",
+                    "No Contracts, Cancel Anytime",
+                  ],
+                  priceId: "price_1Q8yKdKzDxzEb95OTbtiHOnU",
+                },
+              ].map((plan, index) => (
+                <Card key={index} className="flex flex-col">
+                  <CardHeader>
+                    <CardTitle>{plan.name}</CardTitle>
+                  </CardHeader>
+                  <CardContent className="flex-1">
+                    <p className="text-4xl font-bold mb-4">
+                      {plan.price}&nbsp;
+                      <span className="text-lg font-normal">
+                        {plan.priceNote ? plan.priceNote : null}
+                      </span>
+                    </p>
+                    <ul className="space-y-2 mb-4">
+                      {plan.features.map((feature, fIndex) => (
+                        <li key={fIndex} className="flex items-center">
+                          <CheckCircle className="mr-2 h-4 w-4 text-green-500" />
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                  {plan.priceId ? (
+                    <SubscribeButton priceId={plan.priceId} />
+                  ) : (
+                    <Link href="/dashboard">
+                      <Button className="w-full">Go to Free Modules</Button>
+                    </Link>
+                  )}
+                </Card>
+              ))}
             </div>
           </div>
         </section>
@@ -187,10 +187,7 @@ export default function LandingPage() {
             </div>
           </div>
         </section> */}
-        <section
-          className="w-full py-12 md:py-24 lg:py-32 bg-white"
-          id="contact"
-        >
+        <section className="w-full py-12 md:py-24 lg:py-32 " id="contact">
           <div className="container px-4 md:px-6 mx-auto">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
@@ -235,11 +232,11 @@ export default function LandingPage() {
           © 2024 CS 925. All rights reserved.
         </p>
         <nav className="sm:ml-auto flex gap-4 sm:gap-6">
-          <Link className="text-xs hover:underline underline-offset-4" href="#">
-            Terms of Service
-          </Link>
-          <Link className="text-xs hover:underline underline-offset-4" href="#">
-            Privacy
+          <Link
+            className="text-xs hover:underline underline-offset-4"
+            href="privacy"
+          >
+            Terms of Service & Privacy
           </Link>
         </nav>
       </footer>

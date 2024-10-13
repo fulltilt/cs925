@@ -113,7 +113,13 @@ export default function TableOfContents() {
           <Accordion
             type="multiple"
             className="w-full"
-            defaultValue={["section-0"]}
+            defaultValue={[
+              "section-0",
+              "section-1",
+              "section-2",
+              "section-3",
+              "section-4",
+            ]}
           >
             {courseSections.map((section, index) => (
               <AccordionItem value={`section-${index}`} key={index}>

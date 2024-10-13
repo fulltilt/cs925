@@ -116,8 +116,8 @@ export default function LandingPage() {
                 },
                 {
                   name: "Pro",
-                  price: "$49 / month",
-                  priceNote: "(normally $99)",
+                  price: "$99 / month",
+                  priceNote: "(normally $199)",
                   features: [
                     "Access to All Modules",
                     "Discord Server Access",

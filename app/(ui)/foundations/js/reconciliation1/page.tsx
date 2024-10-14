@@ -6,9 +6,9 @@ export default function Reconciliation1() {
       <h1>DOM Reconciliation with Vanilla JavaScript</h1>
       <p>
         <em>
-          (NOTE: this iss more advanced and isn't necessary to learn as a
-          beginner but it's good to know what modern day frameworks are doing
-          under the hood.)
+          (NOTE: this iss more advanced and isn&apos;t necessary to learn as a
+          beginner but it&apos;s good to know what modern day frameworks are
+          doing under the hood.)
         </em>
       </p>
       <p>

@@ -27,16 +27,9 @@ const SubscribeComponent = ({ priceId }: { priceId: string }) => {
         })
       ).json();
 
-      const res = await stripe.redirectToCheckout({
+      await stripe.redirectToCheckout({
         sessionId: data.result.id,
       });
-
-      //   console.log(data);
-      //   const data = response.data;
-      //   if (!data.ok) throw new Error('Something went wrong');
-      //   await stripe.redirectToCheckout({
-      //     sessionId: data.result.id
-      //   });
     } catch (error) {
       console.log(error);
     } finally {

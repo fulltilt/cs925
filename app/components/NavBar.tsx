@@ -1,6 +1,6 @@
 import Link from "next/link";
-// import { SignInButton } from "./signInButton";
-// import { SignOutButton } from "./signOutButton";
+import { SignInButton } from "./SignInButton";
+import { SignOutButton } from "./SignOutButton";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,9 +8,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Laptop } from "lucide-react";
+import { auth } from "../api/auth/authConfig";
 import { ThemeSwitcher } from "./ThemeSwitcher";
-// import { auth } from "../api/auth/authConfig";
-// import { ThemeSwitcher } from "./ThemeSwitcher";
 
 export function Hamburger() {
   return (
@@ -32,7 +31,7 @@ export function Hamburger() {
 }
 
 export async function NavBar() {
-  //   const session = await auth();
+  const session = await auth();
 
   return (
     <nav className="sticky top-0 z-50 flex w-full items-center justify-between p-2 pl-4 pr-4 text-xl font-semibold bg-white dark:bg-slate-900">
@@ -66,18 +65,10 @@ export async function NavBar() {
                   Dashboard
                 </Link>
               </DropdownMenuItem>
-              {/* <DropdownMenuItem>
-                <Link
-                  href="https://www.paypal.com/donate/?hosted_button_id=ZCDZKZW4JE5LG"
-                  className="text-sm"
-                >
-                  Donate
-                </Link>
-              </DropdownMenuItem> */}
               <DropdownMenuItem>
-                {/* <div className="mt-4 sm:mt-0">
+                <div className="mt-4 sm:mt-0">
                   {session?.user ? <SignOutButton /> : <SignInButton />}
-                </div> */}
+                </div>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -86,7 +77,7 @@ export async function NavBar() {
       <div className="hidden sm:block">
         <div className="mt-4 flex gap-4 sm:mt-0">
           <ThemeSwitcher />
-          {/* {session?.user ? <SignOutButton /> : <SignInButton />} */}
+          {session?.user ? <SignOutButton /> : <SignInButton />}
         </div>
       </div>
     </nav>

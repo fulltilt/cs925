@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/accordion";
 import { Progress } from "@/components/ui/progress";
 import {
+  BookOpen,
   Code,
   Layout,
   Database,
@@ -79,6 +80,7 @@ export default function TableOfContents() {
       title: "Misc Topics (Upcoming)",
       icon: <Code className="h-5 w-5" />,
       lessons: [
+        { module: "Version Control with Git", url: "#" },
         { module: "Public/Private Key Encryption", url: "#" },
         { module: "Authentication Using JSON Web Tokens (JWTs)", url: "#" },
         { module: "Deploying Your App to the Cloud", url: "#" },
@@ -110,6 +112,15 @@ export default function TableOfContents() {
               <p className="text-sm text-gray-500 mt-2">0% Complete</p>
             </CardContent>
           </Card>
+          <div className="flex gap-2">
+            <BookOpen className="h-5 w-5" />
+            <Link
+              href="/intro"
+              className="text-sm no-underline hover:underline"
+            >
+              Introduction
+            </Link>
+          </div>
           <Accordion
             type="multiple"
             className="w-full"
@@ -142,7 +153,7 @@ export default function TableOfContents() {
                         />
                         <Link
                           href={lesson.url}
-                          className="text-sm hover:underline"
+                          className="text-sm no-underline hover:underline"
                         >
                           {lesson.module}
                         </Link>

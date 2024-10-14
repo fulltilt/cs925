@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { CheckCircle, Laptop, Code, Brain, Rocket, Menu } from "lucide-react";
+import { CheckCircle, Code, Brain, Rocket } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
@@ -13,7 +13,6 @@ import SubscribeButton from "./components/SubscribeButton";
 export default function LandingPage() {
   const { toast } = useToast();
 
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [email, setEmail] = useState("");
 
   return (

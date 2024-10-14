@@ -1,4 +1,5 @@
 import CodeHighlight from "@/app/components/CodeHighlight";
+import NavigationLinks from "@/app/components/NavigationLinks";
 
 export default function DevEnv() {
   return (
@@ -14,9 +15,9 @@ export default function DevEnv() {
       </p>
       <p>
         The following is an extremely brief overview of the recommended tools
-        which we'll expand on in later modules but this is enough to get you
-        started or at the very least familiarized with tools that will help you
-        on your journey.
+        which we&apos;ll expand on in later modules but this is enough to get
+        you started or at the very least familiarized with tools that will help
+        you on your journey.
       </p>
 
       <hr />
@@ -305,8 +306,8 @@ npm -v
               Install the Prettier extension in VS Code. Once installed, enable
               formatting on save by going to VS Code settings (
               <code>Command + ,</code> on Mac or <code>Ctrl + ,</code> on
-              Windows), searching for 'format' in search bar and then checking{" "}
-              <strong>Format on Save</strong>
+              Windows), searching for &apos;format&apos; in search bar and then
+              checking <strong>Format on Save</strong>
             </li>
           </ul>
         </li>
@@ -340,8 +341,8 @@ npx eslint --init
       <p>
         Once you get into the cloud or SQL database modules, you will want to
         containerize your database and/or app to make life easier. For now, you
-        don't have to worry about it but Docker will be a great addition to your
-        development toolkit .
+        don&apos;t have to worry about it but Docker will be a great addition to
+        your development toolkit .
       </p>
       <ul>
         <li>
@@ -391,7 +392,16 @@ CMD ["npm", "start"]
         JavaScript applications, this setup will make your development
         experience smoother and more enjoyable.
       </p>
-      <p>Happy coding! 🎨💻</p>
+      <NavigationLinks
+        prevLesson={{
+          slug: "/foundations/webdev",
+          title: "What Is Web Development",
+        }}
+        nextLesson={{
+          slug: "/foundations/html",
+          title: "Introduction to HTML",
+        }}
+      />
     </div>
   );
 }

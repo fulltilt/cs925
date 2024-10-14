@@ -1,4 +1,5 @@
 import CodeHighlight from "@/app/components/CodeHighlight";
+import NavigationLinks from "@/app/components/NavigationLinks";
 
 export default function CSS() {
   return (
@@ -54,9 +55,9 @@ h1 {
       </h3>
       <p>
         This method uses the <code>style</code> attribute directly inside an
-        HTML tag. It’s not ideal for maintaining larger websites but is simple
-        for quick changes. (NOTE: For the examples on this page, we're using
-        inline styles.)
+        HTML tag. It&apos;s not ideal for maintaining larger websites but is
+        simple for quick changes. (NOTE: For the examples on this page, we're
+        using inline styles.)
       </p>
       <h3>Example:</h3>
       <CodeHighlight
@@ -543,6 +544,16 @@ button:hover {
         Now you’re ready to start creating beautiful web pages using CSS! Feel
         free to experiment with different properties and layouts.
       </p>
+      <NavigationLinks
+        prevLesson={{
+          slug: "/foundations/html",
+          title: "Introduction to HTML",
+        }}
+        nextLesson={{
+          slug: "/foundations/js",
+          title: "Introduction to JavaScript",
+        }}
+      />
     </div>
   );
 }

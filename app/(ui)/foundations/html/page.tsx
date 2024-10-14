@@ -1,4 +1,5 @@
 import CodeHighlight from "@/app/components/CodeHighlight";
+import NavigationLinks from "@/app/components/NavigationLinks";
 
 export default function HTML() {
   return (
@@ -11,7 +12,8 @@ export default function HTML() {
       </p>
       <h2>1. Basic Structure of an HTML Document</h2>
       <p>
-        Every HTML document follows a basic structure. Here's a simple template:
+        Every HTML document follows a basic structure. Here&apos;s a simple
+        template:
       </p>
       <CodeHighlight
         content={`
@@ -386,8 +388,18 @@ export default function HTML() {
       <p>
         That&#39;s the foundation of HTML! You can now start experimenting and
         building your own web pages but as you can tell, the pages look very
-        bland so let's get into how we can add some styling to our pages.
+        bland so let&apos;s get into how we can add some styling to our pages.
       </p>
+      <NavigationLinks
+        prevLesson={{
+          slug: "/foundations/devenv",
+          title: "Setting Up Your Development Environment",
+        }}
+        nextLesson={{
+          slug: "/foundations/css",
+          title: "Introduction to CSS",
+        }}
+      />
     </div>
   );
 }

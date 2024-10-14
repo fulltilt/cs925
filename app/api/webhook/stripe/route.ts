@@ -18,27 +18,26 @@ export async function POST(req: any) {
       return Response.json({ error: `Webhook Error ${err?.message!} ` });
     }
 
-    console.log(event);
+    // console.log(event);
     switch (event.type) {
       case "invoice.payment_succeeded":
         // update here
         const result = event.data.object;
+        console.log(result);
         const end_at = new Date(
           result.lines.data[0].period.end * 1000
         ).toISOString();
+
         const customer_id = result.customer as string;
         const subscription_id = result.subscription as string;
         const email = result.customer_email as string;
-        const error = await onPpaymentSucceeded(
-          end_at,
-          customer_id,
-          subscription_id,
-          email
-        );
-        // if (error) {
-        // 	console.log(error);
-        // 	return Response.json({ error: error.message });
-        // }
+
+        try {
+          await onPaymentSucceeded(end_at, customer_id, subscription_id, email);
+        } catch (error) {
+          console.log(error);
+          return Response.json({ error: error });
+        }
         break;
       case "customer.subscription.deleted":
         const deleteSubscription = event.data.object;
@@ -57,7 +56,7 @@ export async function POST(req: any) {
   }
 }
 
-async function onPpaymentSucceeded(
+async function onPaymentSucceeded(
   end_at: string,
   customer_id: string,
   subscription_id: string,

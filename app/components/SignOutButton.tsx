@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { handleSignOut } from "../api/auth/signOutServerAcion";
+import { handleSignOut } from "../api/auth/SignOutServerAcion";
 import { useState } from "react";
 import { LoadingSpinner } from "@/components/ui/spinner";
 

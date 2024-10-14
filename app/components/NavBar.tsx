@@ -32,6 +32,7 @@ export function Hamburger() {
 
 export async function NavBar() {
   const session = await auth();
+  const user = session?.user;
 
   return (
     <nav className="sticky top-0 z-50 flex w-full items-center justify-between p-2 pl-4 pr-4 text-xl font-semibold bg-white dark:bg-slate-900">
@@ -43,14 +44,16 @@ export async function NavBar() {
           <Laptop className="h-6 w-6 text-blue-600" />
           <span className="ml-2 text-xl md:text-2xl font-bold ">CS 925</span>
         </Link>
-        <div className="hidden gap-8 sm:flex">
-          <Link
-            className="text-sm font-medium hover:underline underline-offset-4 no-underline"
-            href="/dashboard"
-          >
-            Dashboard
-          </Link>
-        </div>
+        {user && user.stripeData && (
+          <div className="hidden gap-8 sm:flex">
+            <Link
+              className="text-sm font-medium hover:underline underline-offset-4 no-underline"
+              href="/dashboard"
+            >
+              Dashboard
+            </Link>
+          </div>
+        )}
       </div>
       <div className="sm:hidden">
         <div className="flex gap-4">
@@ -60,11 +63,13 @@ export async function NavBar() {
               <Hamburger />
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-              <DropdownMenuItem>
-                <Link href="/dashboard" className="text-sm">
-                  Dashboard
-                </Link>
-              </DropdownMenuItem>
+              {user && (
+                <DropdownMenuItem>
+                  <Link href="/dashboard" className="text-sm">
+                    Dashboard
+                  </Link>
+                </DropdownMenuItem>
+              )}
               <DropdownMenuItem>
                 <div className="mt-4 sm:mt-0">
                   {session?.user ? <SignOutButton /> : <SignInButton />}

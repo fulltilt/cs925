@@ -31,9 +31,11 @@ export const user = createTable("user", {
   username: text("username").unique(),
   email: text("email").unique(),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
-  completed_trades: integer("completed_trades").default(0),
-  is_premium: boolean("is_premium").default(false),
   image: text("image"),
+  stripe_data: jsonb("stripe_data"),
+  createdAt: timestamp("created_at", { withTimezone: true })
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
 });
 
 export const accounts = createTable(

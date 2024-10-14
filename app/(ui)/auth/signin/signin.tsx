@@ -1,10 +1,21 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { handleEmailSignIn } from "@/app/api/auth/emailSignInServerAction";
+import { handleEmailSignIn } from "@/app/api/auth/EmailSignInServerAction";
 // import { handleGoogleSignIn } from "~/app/api/auth/googleSignInServerAction";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { AlertCircle, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 function GoogleIcon() {
   return (
@@ -38,86 +49,92 @@ function GoogleIcon() {
 
 export default function SignInPage() {
   const [isPending, startTransition] = useTransition();
-  const [formData, setFormData] = useState({ email: "" as string });
-  const [loading1, setLoading1] = useState(false);
-  const [loading2, setLoading2] = useState(false);
+
+  const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState<{
+    type: "success" | "error";
+    text: string;
+  } | null>(null);
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault(); // Prevents the form from submitting and reloading the page, allowing us to handle the submission in TypeScript.
-    try {
-      startTransition(async () => {
-        console.log(formData);
-        await handleEmailSignIn(formData.email);
-      });
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading1(false);
-    }
+
+    setIsLoading(true);
+    setMessage(null);
+    startTransition(async () => {
+      try {
+        await handleEmailSignIn(email);
+        setMessage({
+          type: "success",
+          text: "Magic link sent! Check your email.",
+        });
+      } catch (error) {
+        // redirect("/auth/auth-error");
+        setMessage({
+          type: "error",
+          text: "Failed to send magic link. Please try again.",
+        });
+      } finally {
+        setIsLoading(false);
+      }
+    });
   };
 
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "hsl(0, 0%, 97.5%)" }}
-    >
-      <div
-        className="w-80 rounded-2xl bg-white p-8 text-center"
-        style={{ boxShadow: "0 4px 8px hsl(0, 0%, 70%)" }}
-      >
-        <h2 className="mb-4 text-3xl">CS 925</h2>
-        <h2 className="text-2xl">Sign In</h2>
-        <div className="mt-4 flex flex-col items-center gap-4">
-          <form
-            className="flex w-[100%] flex-col gap-4"
-            onSubmit={handleSubmit}
-          >
-            <input
-              className="rounded-sm border p-2"
-              style={{ borderColor: "hsl(0, 0%, 70%)" }}
-              type="email"
-              maxLength={320}
-              placeholder="Email Address"
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                setFormData({ email: event.target.value })
-              }
-              disabled={isPending}
-              required
-            />
-            <Button type="submit" onClick={() => setLoading1(true)}>
-              {loading1 && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              &nbsp;&nbsp;Sign in with email
-            </Button>
-          </form>
-
-          {/* <div className="flex w-[75%] items-center p-2">
-            <div
-              className="h-[1px] grow"
-              style={{ backgroundColor: "hsl(0, 0%, 70%)" }}
-            ></div>
-            <span className="p-[0 1rem]">or</span>
-            <div
-              className="h-[1px] grow"
-              style={{ backgroundColor: "hsl(0, 0%, 70%)" }}
-            ></div>
+    <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-black">
+      <Card className="w-[350px]">
+        <CardHeader>
+          <CardTitle className="text-center text-2xl">CS 925 Login</CardTitle>
+          <CardDescription>
+            <p>Enter your email to receive a magic link.</p>
+            <p>(For new users, this will create a new account.)</p>
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          {/* <form onSubmit={handleSubmit}> */}
+          <div className="grid w-full items-center gap-4">
+            <div className="flex flex-col space-y-1.5">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                placeholder="Enter your email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
           </div>
-
-          <div className="flex w-[100%] flex-col">
-            <Button
-              className="google"
-              onClick={async () => {
-                setLoading2(true);
-                await handleGoogleSignIn();
-                setLoading2(false);
-              }}
+          {/* </form> */}
+        </CardContent>
+        <CardFooter className="flex flex-col">
+          <Button
+            className="w-full"
+            type="submit"
+            disabled={isLoading}
+            onClick={handleSubmit}
+          >
+            {isLoading ? "Sending..." : "Send Magic Link"}
+          </Button>
+          {message && (
+            <Alert
+              variant={message.type === "success" ? "default" : "destructive"}
+              className="mt-4 dark:bg-gray-300"
             >
-              {loading2 && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              <GoogleIcon />
-              &nbsp;&nbsp; Sign in with Google
-            </Button>
-          </div> */}
-        </div>
-      </div>
+              {message.type === "success" ? (
+                <CheckCircle className="h-4 w-4" />
+              ) : (
+                <AlertCircle className="h-4 w-4" />
+              )}
+              <AlertTitle>
+                {message.type === "success" ? "Success" : "Error"}
+              </AlertTitle>
+              <AlertDescription>{message.text}</AlertDescription>
+            </Alert>
+          )}
+        </CardFooter>
+      </Card>
     </div>
   );
 }

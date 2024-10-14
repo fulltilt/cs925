@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { sendMail } from "./server/queries";
 import SubscribeButton from "./components/SubscribeButton";
+import { SignInButton } from "./components/SignInButton";
 
 export default function LandingPage() {
   const { toast } = useToast();
@@ -35,15 +36,6 @@ export default function LandingPage() {
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                {/* <Button className="bg-white text-blue-600 hover:bg-gray-100">
-                  Get Started
-                </Button>
-                <Button
-                  variant="outline"
-                  className="bg-transparent text-white border-white hover:bg-white hover:text-blue-600"
-                >
-                  Learn More
-                </Button> */}
                 <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
                   {/* <Input className="max-w-lg flex-1" type="email" /> */}
                   <Button
@@ -146,13 +138,14 @@ export default function LandingPage() {
                       ))}
                     </ul>
                   </CardContent>
-                  {plan.priceId ? (
+                  {/* {plan.priceId ? (
                     <SubscribeButton priceId={plan.priceId} />
                   ) : (
                     <Link href="/dashboard">
                       <Button className="w-full">Go to Free Modules</Button>
                     </Link>
-                  )}
+                  )} */}
+                  <SignInButton className="w-full" />
                 </Card>
               ))}
             </div>

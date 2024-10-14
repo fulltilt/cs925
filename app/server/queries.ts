@@ -1,5 +1,9 @@
 "use server";
 
+import { db } from "@/server/db";
+import { user } from "@/server/db/schema";
+import { eq } from "drizzle-orm";
+
 const nodemailer = require("nodemailer");
 
 const transporter = nodemailer.createTransport({
@@ -20,4 +24,13 @@ export async function sendMail(email: string) {
     text: email, // plain text body
     html: email, // html body
   });
+}
+
+export async function updateUser(id: string, stripe_data: any) {
+  try {
+    await db.update(user).set({ stripe_data }).where(eq(user.id, id)).execute();
+    return { data: "Successfully updated user" };
+  } catch (err) {
+    return { error: "Error updating user" };
+  }
 }

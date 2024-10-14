@@ -1,3 +1,14 @@
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { AlertCircle } from "lucide-react";
+
 function ExclamationTriangle() {
   return (
     <svg
@@ -19,39 +30,24 @@ function ExclamationTriangle() {
 
 export default function AuthSuccessPage() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "hsl(0, 0%, 97.5%)" }}
-    >
-      <div
-        className="w-80 rounded-lg bg-white p-8 text-center"
-        style={{ boxShadow: "0 4px 8px hsl(0, 0%, 70%)" }}
-      >
-        <div
-          className="mb-8 grid items-center rounded-lg"
-          style={{
-            gridTemplateColumns: "auto 1fr",
-            color: "hsl(0, 100%, 50%)",
-            padding: "0rem 1rem",
-          }}
-        >
-          <ExclamationTriangle />
+    <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-black">
+      <Card className="w-[350px]">
+        <CardHeader>
+          <CardTitle className="text-center text-2xl">CS 925 Login</CardTitle>
+          <CardDescription></CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Alert variant={"destructive"} className="mt-4">
+            <AlertCircle className="h-4 w-4" color="green" />
 
-          <p>{"Oops, something went wrong."}</p>
-        </div>
-        <div>
-          <p>
-            {"To go back to the sign in page,"}
-
-            <a
-              href="/api/auth/signin"
-              style={{ cursor: "pointer", textDecoration: "underline" }}
-            >
-              Click Here
-            </a>
-          </p>
-        </div>
-      </div>
+            <AlertTitle>Error!</AlertTitle>
+            <AlertDescription>
+              Failed to send magic link. Please try again.
+            </AlertDescription>
+          </Alert>
+        </CardContent>
+        <CardFooter className="flex flex-col"></CardFooter>
+      </Card>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import SignInPage from "./signin";
-import { checkIsAuthenticated } from "@/app/api/auth/CheckIsAuthenticated";
+import { checkIsAuthenticated } from "@/app/api/auth/checkIsAuthenticated";
 import { auth } from "@/app/api/auth/authConfig";
 
 export default async function SignIn() {

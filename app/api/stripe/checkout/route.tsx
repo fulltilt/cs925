@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
           },
         ],
         mode: "subscription",
-        success_url: `${process.env.NEXT_BASE_URL}/profile`,
+        success_url: `${process.env.NEXT_BASE_URL}/dashboard`,
         cancel_url: `${process.env.NEXT_BASE_URL}/profile`,
         metadata: {
           userId,

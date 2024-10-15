@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { handleEmailSignIn } from "@/app/api/auth/EmailSignInServerAction";
+import { handleEmailSignIn } from "@/app/api/auth/emailSignInServerAction";
 import {
   Card,
   CardContent,

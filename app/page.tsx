@@ -8,7 +8,6 @@ import Link from "next/link";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { sendMail } from "./server/queries";
-import SubscribeButton from "./components/SubscribeButton";
 import { SignInButton } from "./components/SignInButton";
 
 export default function LandingPage() {

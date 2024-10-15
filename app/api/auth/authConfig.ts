@@ -43,7 +43,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }),
   ],
   callbacks: {
-    async jwt({ token, user, session, trigger }) {
+    async jwt({ token }) {
       const userData = await db
         .select()
         .from(db_user)

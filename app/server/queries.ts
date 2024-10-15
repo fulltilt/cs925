@@ -26,6 +26,21 @@ export async function sendMail(email: string) {
   });
 }
 
+export async function getUser(id: string) {
+  try {
+    const res = await db.select().from(user).where(eq(user.id, id)).execute();
+    const { email, image } = res[0];
+    // @ts-ignore
+    const subscriptionDate = new Date(
+      res[0].stripe_data.created * 1000
+    ).toISOString();
+
+    return { email, image, subscriptionDate };
+  } catch (err) {
+    return { error: "Error updating user" };
+  }
+}
+
 export async function updateUser(id: string, stripe_data: any) {
   try {
     await db.update(user).set({ stripe_data }).where(eq(user.id, id)).execute();

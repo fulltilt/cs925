@@ -3,7 +3,7 @@ import NavigationLinks from "@/app/components/NavigationLinks";
 
 export default function HTML() {
   return (
-    <div className="flex max-w-[70ch] mx-4 sm:mx-auto flex-col gap-4 empty:hidden first:pt-[3px] lesson">
+    <div className="flex max-w-[75ch] mx-4 sm:mx-auto flex-col gap-4 empty:hidden first:pt-[3px] lesson">
       <h1>HTML</h1>
       <p>
         HTML (HyperText Markup Language) is the standard language for creating

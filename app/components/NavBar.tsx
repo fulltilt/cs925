@@ -7,6 +7,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Laptop } from "lucide-react";
 import { auth } from "../api/auth/authConfig";
 import { ThemeSwitcher } from "./ThemeSwitcher";
@@ -82,7 +83,16 @@ export async function NavBar() {
       <div className="hidden sm:block">
         <div className="mt-4 flex gap-4 sm:mt-0">
           <ThemeSwitcher />
-          {session?.user ? <SignOutButton /> : <SignInButton />}
+          <Avatar className="">
+            <AvatarImage src={user?.image ?? ""} alt={user?.email ?? ""} />
+            <AvatarFallback>
+              {user?.email
+                ?.split(" ")
+                .map((n) => n[0].toUpperCase())
+                .join("") ?? "O"}
+            </AvatarFallback>
+          </Avatar>
+          {/* {session?.user ? <SignOutButton /> : <SignInButton />} */}
         </div>
       </div>
     </nav>

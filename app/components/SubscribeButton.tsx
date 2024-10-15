@@ -41,7 +41,7 @@ const SubscribeComponent = ({ priceId }: { priceId: string }) => {
       const data = await (
         await fetch("/api/stripe/checkout", {
           method: "POST",
-          body: JSON.stringify({ priceId: priceId }),
+          body: JSON.stringify({ priceId: priceId, id: user?.id }),
         })
       ).json();
 

@@ -7,10 +7,11 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 
 export async function POST(request: NextRequest) {
   try {
-    // you can implement some basic check here like, is user valid or not
     const data = await request.json();
 
+    const userId = data.id;
     const priceId = data.priceId;
+
     const checkoutSession: Stripe.Checkout.Session =
       await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
@@ -21,10 +22,10 @@ export async function POST(request: NextRequest) {
           },
         ],
         mode: "subscription",
-        success_url: `${process.env.NEXT_BASE_URL}/billing`,
-        cancel_url: `${process.env.NEXT_BASE_URL}/billing`,
+        success_url: `${process.env.NEXT_BASE_URL}/profile`,
+        cancel_url: `${process.env.NEXT_BASE_URL}/profile`,
         metadata: {
-          //   userId: loggedUser.id,
+          userId,
           priceId,
         },
       });

@@ -1,87 +1,79 @@
 import Stripe from "stripe";
 import { headers } from "next/headers";
 import { buffer } from "node:stream/consumers";
+import { db } from "@/server/db";
+import { user } from "@/server/db/schema";
+import { eq, sql } from "drizzle-orm";
+import { NextApiRequest } from "next";
 
 const endpointSecret = process.env.STRIPE_ENDPOINT_SECRET!;
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
-export async function POST(req: any) {
+export async function POST(req: NextApiRequest) {
   const rawBody = await buffer(req.body);
   try {
     const sig = headers().get("stripe-signature");
-    let event;
+    let event: Stripe.Event;
 
     try {
       event = stripe.webhooks.constructEvent(rawBody, sig!, endpointSecret);
-    } catch (err: any) {
-      return Response.json({ error: `Webhook Error ${err?.message!} ` });
+    } catch (err: unknown) {
+      return Response.json({ error: `Webhook Error ${err?.message ?? ""} ` });
     }
 
-    // console.log(event);
     switch (event.type) {
-      case "invoice.payment_succeeded":
-        // update here
-        const result = event.data.object;
-        console.log(result);
-        const end_at = new Date(
-          result.lines.data[0].period.end * 1000
-        ).toISOString();
+      // const end_at = new Date(
+      //   result.lines.data[0].period.end * 1000
+      // ).toISOString();
 
-        const customer_id = result.customer as string;
-        const subscription_id = result.subscription as string;
-        const email = result.customer_email as string;
+      // used to get metadata
+      case "checkout.session.completed": {
+        const userId = event.data.object.metadata?.userId ?? "";
+        const checkoutSession: Stripe.Checkout.Session = event.data.object;
 
         try {
-          await onPaymentSucceeded(end_at, customer_id, subscription_id, email);
+          await db
+            .update(user)
+            .set({ stripe_data: sql`${checkoutSession}::jsonb` })
+            .where(eq(user.id, userId as string));
+        } catch (error) {
+          console.log(error);
+          return Response.json({ error });
+        }
+        break;
+      }
+
+      case "customer.subscription.updated": {
+        const subscription = event.data.object;
+        const subscriptionId = subscription.id;
+        console.log("sub update", subscription);
+
+        try {
+          const res = await db.execute(sql`
+            SELECT * 
+            FROM cs925_user
+            WHERE (stripe_data->>'subscription')::text = ${subscriptionId} OR
+                  (stripe_data->>'id')::text = ${subscriptionId}
+          `);
+          const userId = res.rows[0].id;
+
+          await db
+            .update(user)
+            .set({ stripe_data: sql`${subscription}::jsonb` })
+            .where(eq(user.id, userId as string));
         } catch (error) {
           console.log(error);
           return Response.json({ error: error });
         }
+
         break;
-      case "customer.subscription.deleted":
-        const deleteSubscription = event.data.object;
-        const cancelError = await onSubCancel(deleteSubscription.id);
-        // if (cancelError) {
-        // 	console.log(cancelError);
-        // 	return Response.json({ error: cancelError.message });
-        // }
-        break;
+      }
       default:
         console.log(`Unhandled event type ${event.type}`);
     }
     return Response.json({});
   } catch (e) {
-    return Response.json({ error: `Webhook Error}` });
+    return Response.json({ error: `Webhook Error: ${e?.message}` });
   }
-}
-
-async function onPaymentSucceeded(
-  end_at: string,
-  customer_id: string,
-  subscription_id: string,
-  email: string
-) {
-  // const supabase = await supabaseAdmin();
-  // const { error } = await supabase
-  // 	.from("subscription")
-  // 	.update({
-  // 		end_at,
-  // 		customer_id,
-  // 		subscription_id,
-  // 	})
-  // 	.eq("email", email);
-  // return error;
-}
-
-async function onSubCancel(subscription_id: string) {
-  // const supabase = await supabaseAdmin();
-  // const { error } = await supabase
-  // 	.from("subscription")
-  // 	.update({
-  // 		customer_id: null,
-  // 		subscription_id: null,
-  // 	})
-  // 	.eq("subscription_id", subscription_id);
-  // return error;
 }

@@ -32,7 +32,7 @@ export default function Subscribe() {
                   "Q&A Support",
                   "No Contracts, Cancel Anytime",
                 ],
-                priceId: "price_1Q8yKdKzDxzEb95OTbtiHOnU",
+                priceId: "price_1Q9eKuKzDxzEb95O4vxJ4kQ8",
               },
             ].map((plan, index) => (
               <Card key={index} className="flex flex-col">

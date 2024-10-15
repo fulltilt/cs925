@@ -1,6 +1,6 @@
 export default function Privacy() {
   return (
-    <div className="flex max-w-[70ch] mx-4 sm:mx-auto flex-col gap-4 empty:hidden first:pt-[3px] lesson">
+    <div className="flex max-w-[75ch] mx-4 sm:mx-auto flex-col gap-4 empty:hidden first:pt-[3px] lesson">
       <p className="m-auto text-2xl font-bold">PRIVACY POLICY</p>
       <p className="m-auto font-semibold">Last updated September 13, 2024</p>
       <p>

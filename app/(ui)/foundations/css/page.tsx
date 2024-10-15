@@ -3,7 +3,7 @@ import NavigationLinks from "@/app/components/NavigationLinks";
 
 export default function CSS() {
   return (
-    <div className="flex max-w-[70ch] mx-4 sm:mx-auto flex-col gap-4 empty:hidden first:pt-[3px] lesson">
+    <div className="flex max-w-[75ch] mx-4 sm:mx-auto flex-col gap-4 empty:hidden first:pt-[3px] lesson">
       <h1>CSS</h1>
       <p>
         CSS (Cascading Style Sheets) is used to control the appearance of HTML
@@ -56,8 +56,8 @@ h1 {
       <p>
         This method uses the <code>style</code> attribute directly inside an
         HTML tag. It&apos;s not ideal for maintaining larger websites but is
-        simple for quick changes. (NOTE: For the examples on this page, we're
-        using inline styles.)
+        simple for quick changes. (NOTE: For the examples on this page,
+        we&apos;re using inline styles.)
       </p>
       <h3>Example:</h3>
       <CodeHighlight

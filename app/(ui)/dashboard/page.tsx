@@ -81,11 +81,13 @@ export default function TableOfContents() {
       icon: <Code className="h-5 w-5" />,
       lessons: [
         { module: "Version Control with Git", url: "#" },
+        { module: "TypeScript", url: "#" },
         { module: "Public/Private Key Encryption", url: "#" },
         { module: "Authentication Using JSON Web Tokens (JWTs)", url: "#" },
         { module: "Deploying Your App to the Cloud", url: "#" },
         { module: "Setting up a Domain", url: "#" },
         { module: "Zod for Form Validation", url: "#" },
+        { module: "Tailwind for Styling", url: "#" },
         // { module: "Web Security Best Practices", url: "#" },
         // { module: "Performance Optimization", url: "#" },
         // { module: "Deployment and DevOps", url: "#" },
@@ -175,33 +177,6 @@ export default function TableOfContents() {
           </div>
         </div>
       </main>
-      <footer className="py-6 px-4 md:px-6 border-t">
-        <div className="max-w-4xl mx-auto flex flex-col sm:flex-row justify-between items-center">
-          <p className="text-sm text-gray-500">
-            © 2024 CodeMaster Academy. All rights reserved.
-          </p>
-          <nav className="flex gap-4 mt-4 sm:mt-0">
-            <Link
-              className="text-sm text-gray-500 hover:underline underline-offset-4"
-              href="#"
-            >
-              Terms of Service
-            </Link>
-            <Link
-              className="text-sm text-gray-500 hover:underline underline-offset-4"
-              href="#"
-            >
-              Privacy Policy
-            </Link>
-            <Link
-              className="text-sm text-gray-500 hover:underline underline-offset-4"
-              href="#"
-            >
-              Contact Us
-            </Link>
-          </nav>
-        </div>
-      </footer>
     </div>
   );
 }

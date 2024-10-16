@@ -23,7 +23,7 @@ export default function NavigationLinks({
           <Link
             href={`${prevLesson.slug}`}
             passHref
-            className="flex gap-4 items-center no-underline hover:bg-gray-100 dark:hover:bg-gray-80 rounded-lg p-4"
+            className="flex gap-4 items-center no-underline hover:bg-gray-100 dark:hover:bg-black rounded-lg p-4"
           >
             <ChevronLeft className="h-4 w-4" />
             <div className="flex flex-col gap-2">
@@ -43,7 +43,7 @@ export default function NavigationLinks({
           <Link
             href={`${nextLesson.slug}`}
             passHref
-            className="flex gap-4 items-center no-underline hover:bg-gray-100 rounded-lg p-4 max-w-sm"
+            className="flex gap-4 items-center no-underline hover:bg-gray-100 hover:dark:bg-black rounded-lg p-4 max-w-sm"
           >
             <div className="flex flex-col items-end gap-2">
               <span className="text-sm font-bold tracking-wide no-underline uppercase text-[rgb(64,71,86)]">

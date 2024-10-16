@@ -24,15 +24,15 @@ export default function Subscribe() {
               },
               {
                 name: "Pro",
-                price: "$99 / month",
-                priceNote: "(normally $199)",
+                price: "$49 / month",
+                priceNote: "(normally $99)",
                 features: [
                   "Access to All Modules",
                   "Discord Server Access",
                   "Q&A Support",
                   "No Contracts, Cancel Anytime",
                 ],
-                priceId: "price_1Q9eKuKzDxzEb95O4vxJ4kQ8",
+                priceId: "price_1QAI17KzDxzEb95ORmz2kfPM",
               },
             ].map((plan, index) => (
               <Card key={index} className="flex flex-col">

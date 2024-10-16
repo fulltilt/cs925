@@ -38,7 +38,7 @@ const ProfileComponent = () => {
             <AvatarFallback>
               {user?.email
                 ?.split(" ")
-                .map((n) => n[0].toUpperCase())
+                .map((n: string[]) => n[0].toUpperCase())
                 .join("") ?? "O"}
             </AvatarFallback>
           </Avatar>
@@ -57,49 +57,57 @@ const ProfileComponent = () => {
               <p className="text-sm text-gray-500 break-all">{user?.email}</p>
             </div>
           </div>
-          <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
-            <CalendarIcon className="text-gray-500 w-5 h-5 sm:w-6 sm:h-6" />
-            <div>
-              <p className="text-sm font-medium">Member Since</p>
-              <p className="text-sm text-gray-500">
-                {user &&
-                  new Date(
-                    user?.stripeData?.created * 1000
-                  ).toLocaleDateString()}
-              </p>
+          {user?.stripeData !== "free" && (
+            <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
+              <CalendarIcon className="text-gray-500 w-5 h-5 sm:w-6 sm:h-6" />
+              <div>
+                <p className="text-sm font-medium">Member Since</p>
+                <p className="text-sm text-gray-500">
+                  {user &&
+                    new Date(
+                      user?.stripeData?.created * 1000
+                    ).toLocaleDateString()}
+                </p>
+              </div>
             </div>
-          </div>
+          )}
         </CardContent>
         <CardFooter className="px-4 sm:px-6 pt-4 sm:pt-6">
-          <AlertDialog>
-            <AlertDialogTrigger asChild>
-              <Button className="w-full">Update Subscription</Button>
-            </AlertDialogTrigger>
-            <AlertDialogContent className="max-w-[90vw] sm:max-w-lg">
-              <AlertDialogHeader>
-                <AlertDialogTitle>Redirect to Stripe?</AlertDialogTitle>
-                <AlertDialogDescription>
-                  To view your subscription details, you will be redirected to
-                  Stripe where you will be asked for your email this account is
-                  associated with
-                </AlertDialogDescription>
-              </AlertDialogHeader>
-              <AlertDialogFooter className="flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
-                <AlertDialogCancel className="sm:w-auto w-full">
-                  Cancel
-                </AlertDialogCancel>
+          {user?.stripeData === "free" ? (
+            <Link href="/subscribe" className="w-full">
+              <Button className="w-full">Subscribe</Button>
+            </Link>
+          ) : (
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button className="w-full">Update Subscription</Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent className="max-w-[90vw] sm:max-w-lg">
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Redirect to Stripe?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    To view your subscription details, you will be redirected to
+                    Stripe where you will be asked for your email this account
+                    is associated with
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter className="flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
+                  <AlertDialogCancel className="sm:w-auto w-full">
+                    Cancel
+                  </AlertDialogCancel>
 
-                <AlertDialogAction className="sm:w-auto w-full">
-                  <Link
-                    href={process.env.NEXT_PUBLIC_STRIPE_CUSTOMER_PORTAL_URL!}
-                    className="no-underline"
-                  >
-                    Go to Stripe
-                  </Link>
-                </AlertDialogAction>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
+                  <AlertDialogAction className="sm:w-auto w-full">
+                    <Link
+                      href={process.env.NEXT_PUBLIC_STRIPE_CUSTOMER_PORTAL_URL!}
+                      className="no-underline"
+                    >
+                      Go to Stripe
+                    </Link>
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+          )}
         </CardFooter>
       </Card>
     </div>

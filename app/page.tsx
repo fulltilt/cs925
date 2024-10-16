@@ -137,13 +137,6 @@ export default function LandingPage() {
                       ))}
                     </ul>
                   </CardContent>
-                  {/* {plan.priceId ? (
-                    <SubscribeButton priceId={plan.priceId} />
-                  ) : (
-                    <Link href="/dashboard">
-                      <Button className="w-full">Go to Free Modules</Button>
-                    </Link>
-                  )} */}
                   <SignInButton className="w-full" />
                 </Card>
               ))}

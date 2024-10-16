@@ -1,5 +1,7 @@
 "use client";
 
+import { ExternalLink } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { atomOneDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
@@ -13,8 +15,8 @@ const Clipboard = () => (
     fill="none"
     stroke="currentColor"
     strokeWidth="2"
-    stroke-linecap="round"
-    stroke-linejoin="round"
+    strokeLinecap="round"
+    strokeLinejoin="round"
     className="lucide lucide-clipboard"
   >
     <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
@@ -31,8 +33,8 @@ const Checkmark = () => (
     fill="none"
     stroke="currentColor"
     strokeWidth="2"
-    stroke-linecap="round"
-    stroke-linejoin="round"
+    strokeLinecap="round"
+    strokeLinejoin="round"
     className="lucide lucide-check"
   >
     <path d="M20 6 9 17l-5-5" />
@@ -46,24 +48,34 @@ export default function CodeHighlight({ content }: { content: string }) {
     <div className="max-w-2xl min-w-[25rem] bg-[#3a404d] rounded-md overflow-hidden">
       <div className="flex justify-between px-4 py-1 text-white text-xs items-center">
         <p className="text-sm">Example code</p>
-        {!copied ? (
-          <button
-            className="py-1 inline-flex items-center gap-1"
-            onClick={() => {
-              navigator.clipboard.writeText(content);
-              setCopied(true);
-              setTimeout(() => setCopied(false), 3000);
-            }}
+        <div className="flex gap-4">
+          <Link
+            href="/sandbox"
+            target="_blank"
+            className="py-1 inline-flex items-center no-underline text-sm gap-1"
           >
-            <Clipboard />
-            &nbsp;Copy code
-          </button>
-        ) : (
-          <button className="py-1 inline-flex items-center gap-1">
-            <Checkmark />
-            &nbsp;Copied!
-          </button>
-        )}
+            <ExternalLink />
+            <p>Sandbox</p>
+          </Link>
+          {!copied ? (
+            <button
+              className="py-1 inline-flex items-center gap-1"
+              onClick={() => {
+                navigator.clipboard.writeText(content);
+                setCopied(true);
+                setTimeout(() => setCopied(false), 3000);
+              }}
+            >
+              <Clipboard />
+              &nbsp;Copy code
+            </button>
+          ) : (
+            <button className="py-1 inline-flex items-center gap-1">
+              <Checkmark />
+              &nbsp;Copied!
+            </button>
+          )}
+        </div>
       </div>
       <SyntaxHighlighter
         language="html"

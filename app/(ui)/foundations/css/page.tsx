@@ -1,3 +1,4 @@
+import CodeEditor from "@/app/components/CodeEditor";
 import CodeHighlight from "@/app/components/CodeHighlight";
 import NavigationLinks from "@/app/components/NavigationLinks";
 

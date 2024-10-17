@@ -32,19 +32,19 @@ export default function TableOfContents() {
         { module: "Introduction to HTML", url: "/foundations/html" },
         { module: "Introduction to CSS", url: "/foundations/css" },
         { module: "Introduction to JavaScript", url: "/foundations/js" },
-        { module: "Exercises", url: "/foundations/js" },
+        { module: "Exercises", url: "/foundations/exercises" },
       ],
       progress: 0,
     },
     {
-      title: "Front-End Development (Upcoming)",
+      title: "Front-End Development (In Progress)",
       icon: <Layout className="h-5 w-5" />,
       lessons: [
-        { module: "Asynchronous JavaScript", url: "#" },
-        { module: "Promises", url: "#" },
+        { module: "Asynchronous JavaScript", url: "/frontend/js/async" },
         { module: "Common JavaScript APIs", url: "#" },
         { module: "Event Handlers", url: "#" },
         { module: "JavaScript DOM Manipulation", url: "#" },
+        { module: "Promises", url: "#" },
         { module: "Basic Reconciliation", url: "#" },
         { module: "Responsive Web Design", url: "#" },
         { module: "Introduction to React", url: "#" },
@@ -56,7 +56,7 @@ export default function TableOfContents() {
       title: "Back-End Development (Upcoming)",
       icon: <Server className="h-5 w-5" />,
       lessons: [
-        { module: "Introduction to Node.js", url: "#" },
+        { module: "Introduction to Node.js", url: "/backend/node-intro" },
         { module: "Express.js Fundamentals", url: "#" },
         { module: "RESTful API Design", url: "#" },
         { module: "Authentication and Authorization", url: "#" },
@@ -77,9 +77,11 @@ export default function TableOfContents() {
       progress: 0,
     },
     {
-      title: "Misc Topics (Upcoming)",
+      title: "Misc Topics (In Progress)",
       icon: <Code className="h-5 w-5" />,
       lessons: [
+        { module: "User Experience (UX) Basics", url: "/ux/basics" },
+        { module: "Directory Paths and Navigation", url: "/shell/paths" },
         { module: "Version Control with Git", url: "#" },
         { module: "TypeScript", url: "#" },
         { module: "Public/Private Key Encryption", url: "#" },
@@ -172,9 +174,6 @@ export default function TableOfContents() {
               </AccordionItem>
             ))}
           </Accordion>
-          <div className="mt-8 flex justify-center">
-            <Button>Continue Learning</Button>
-          </div>
         </div>
       </main>
     </div>

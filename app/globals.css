@@ -103,6 +103,9 @@ input::placeholder {
   hr {
     @apply mt-8 mb-8;
   }
+  code {
+    /* @apply bg-[#ECECEC] dark:bg-[#42426E]; */
+  }
 }
 
 .lesson {

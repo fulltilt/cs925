@@ -1,3 +1,5 @@
+"use client";
+
 import CodeHighlight from "@/app/components/CodeHighlight";
 import NavigationLinks from "@/app/components/NavigationLinks";
 
@@ -157,6 +159,7 @@ export default function DevEnv() {
 git config --global user.name "Your Name"
 git config --global user.email "you@example.com"
 `}
+            sandboxOption={false}
           />
         </li>
       </ul>
@@ -188,6 +191,7 @@ git config --global user.email "you@example.com"
 node -v
 npm -v
 `}
+            sandboxOption={false}
           />
         </li>
       </ul>
@@ -322,6 +326,7 @@ npm -v
 npm install --save-dev eslint
 npx eslint --init
 `}
+            sandboxOption={false}
           />
           <ul className="ml-4">
             <li>Choose the rules and format you prefer.</li>
@@ -378,6 +383,7 @@ RUN npm install
 COPY . .
 CMD ["npm", "start"]
 `}
+        sandboxOption={false}
       />
 
       <p>This sets up a Node.js environment in Docker.</p>

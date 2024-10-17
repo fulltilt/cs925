@@ -49,3 +49,15 @@ export async function updateUser(id: string, stripe_data: any) {
     return { error: "Error updating user" };
   }
 }
+
+export async function alertDiscord(message: string) {
+  await fetch(process.env.DISCORD_WEBHOOK!, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      content: message,
+    }),
+  });
+}

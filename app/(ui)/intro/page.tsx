@@ -1,112 +1,70 @@
+"use client";
 import NavigationLinks from "@/app/components/NavigationLinks";
+import { alertDiscord } from "@/app/server/queries";
 
 export default function Intro() {
   return (
     <div className="flex max-w-[75ch] mx-4 sm:mx-auto flex-col gap-4 empty:hidden first:pt-[3px] lesson">
-      <h1>Introduction</h1>
-      <h2>What is Web Development?</h2>
+      <h1>Welcome!</h1>
+      <p>Hello, and welcome to CS925! 🎉</p>
       <p>
-        Web development is the process of creating websites and web applications
-        for the internet or a private network (intranet). It involves everything
-        from building simple static web pages to complex platforms like social
-        networks or e-commerce sites. It allows users to access information,
-        services, and tools directly through their web browsers, making the web
-        an interactive and engaging space.
-      </p>
-      <hr />
-      <h2>Key Aspects of Web Development</h2>
-      <p>
-        Web development is generally divided into three main components:
-        frontend development, backend development, and database management.
+        We&apos;re thrilled that you&apos;ve decided to take the first step into
+        the world of coding. Whether you&apos;re looking to build a new career,
+        sharpen your skills, or simply explore the power of technology,
+        you&apos;re in the right place.
       </p>
       <p>
-        <strong>Frontend development</strong> focuses on what users see and
-        interact with directly in their web browsers. It involves building the
-        layout, design, colors, and visual elements of a website. HTML
-        (HyperText Markup Language) is used to structure content, CSS (Cascading
-        Style Sheets) styles the content, and JavaScript makes it interactive.
-        Popular frameworks like React or Vue.js can help streamline the
-        development of more complex user interfaces.
+        This bootcamp is designed <strong>especially for beginners</strong>—no
+        prior programming experience needed! We&apos;ll start from the very
+        basics and guide you through key concepts and practical skills
+        step-by-step. Our hands-on approach ensures that you&apos;ll be writing
+        your own code in no time and ultimately start building real projects to
+        apply what you learn. Everyone goes at their own pace and this course
+        will help accommodate that.
       </p>
       <p>
-        <strong>Backend development</strong> involves the server-side logic that
-        processes requests from the frontend and manages communication with the
-        database. It handles user authentication, data processing, and the
-        overall business logic of an application. This part of web development
-        relies on programming languages like JavaScript (with Node.js), Python,
-        or PHP, along with frameworks such as Express, Django, or Laravel.
+        As of this writing, there are a ton of great resources on this subject
+        but the content is scattered or you consume the content and totally
+        forget about it. I can't recall how many times I have gone through an
+        online video, spent hours coding along and finish it only to forget what
+        I did as it was too much of an information dump in too little time.
+        However, in those resources, I always find little gems here and there
+        and what I'd like to have this course be is to also consolidate those
+        gems into one place.
       </p>
+      <h2>What to Expect:</h2>
+      <ul>
+        <li>
+          <strong>Friendly, Beginner-Focused Learning</strong>: We understand
+          that starting something new can be challenging, so our course is
+          tailored to be accessible and fun, breaking down complex topics into
+          simple, easy-to-digest lessons.
+        </li>
+        <li>
+          <strong>Interactive and Engaging Content</strong>: With video
+          tutorials, interactive exercises, and coding challenges, you&apos;ll
+          learn by doing. We&apos;ll help you turn theory into practice.
+        </li>
+        <li>
+          <strong>Supportive Community</strong>: You&apos;re not alone in this
+          journey! Join a community of fellow beginners and mentors who are here
+          to help, answer questions, and celebrate your progress.
+        </li>
+      </ul>
       <p>
-        <strong>Database management</strong> is the third component, crucial for
-        storing and retrieving data like user information, product details, or
-        blog posts. Databases can be structured using SQL-based systems like
-        MySQL and PostgreSQL, or unstructured using NoSQL options like MongoDB.
+        Our goal is to give you the foundational skills needed to create
+        websites, understand programming logic, and even build your own small
+        apps. Plus, you&apos;ll gain the confidence to continue your coding
+        journey, whether it&#39;s towards web development, software engineering,
+        employment or just solving everyday problems with code.
       </p>
-      <hr />
-      <h2>Frontend and Backend: How They Work Together</h2>
+      <h2>Let&apos;s Get Started!</h2>
       <p>
-        When a user visits a website, the frontend sends a request to the
-        backend server, which processes the request and retrieves data from a
-        database if needed. The server then sends this data back to the
-        frontend, which displays it to the user. For example, when you log into
-        a website, the frontend sends your login details to the backend, which
-        verifies them against a database and returns the relevant user data to
-        be displayed.
+        It&apos;s time to dive in, have some fun, and unlock the power of
+        coding. We&apos;re excited to see what you&apos;ll create!
       </p>
-      <hr />
-      <h2>Types of Web Development</h2>
-      <p>
-        Web development can be categorized into static websites, dynamic
-        websites, and web applications. Static websites have fixed content that
-        doesn&#39;t change unless manually updated, like a basic portfolio site.
-        Dynamic websites adjust content based on user interactions, such as
-        social media platforms or news sites. Web applications are more
-        interactive and allow users to perform tasks, like online banking or
-        project management tools.
-      </p>
-      <hr />
-      <h2>Web Development Roles</h2>
-      <p>
-        In web development, different roles focus on different aspects of the
-        process. Frontend developers work on building user interfaces and making
-        sure that websites are responsive and visually appealing. Backend
-        developers handle server-side logic and data management, ensuring that
-        applications run smoothly. Full stack developers combine both frontend
-        and backend skills, working across the entire development process. Web
-        designers, though more focused on the creative aspect, often collaborate
-        closely with developers to ensure that design mockups are translated
-        into functional interfaces.
-      </p>
-      <hr />
-      <h2>The Importance of Web Development</h2>
-      <p>
-        Web development is vital because it enables businesses, individuals, and
-        organizations to reach a global audience. It makes services and
-        information accessible from anywhere and on any device, and it allows
-        companies to grow by creating engaging online experiences. Beyond
-        practical uses, web development fosters creativity, allowing developers
-        to bring unique, interactive ideas to life on the internet.
-      </p>
-      <hr />
-      <h2>Getting Started with Web Development</h2>
-      <p>
-        To begin learning web development, start with the basics of HTML, CSS,
-        and JavaScript, then practice by building small projects like a personal
-        portfolio or a simple to-do list app. As you gain confidence, explore
-        frameworks like React for the frontend or Express for the backend.
-        Understanding version control with Git is essential for managing your
-        code efficiently. Web development is a constantly evolving field, so
-        it&#39;s important to stay updated with new tools and best practices.
-      </p>
-      <hr />
-      <h2>Summary</h2>
-      <p>
-        Web development is the engine that powers the internet, making websites
-        and web applications possible. It combines creativity, logic, and
-        problem-solving to turn ideas into reality in the digital world. Whether
-        you&#39;re aiming to build a simple blog or a complex platform, learning
-        web development opens up a range of possibilities in the tech industry.
-      </p>
+      <p>Happy coding, and welcome to the world of tech! 🚀</p>
+
       <NavigationLinks
         prevLesson={null}
         nextLesson={{

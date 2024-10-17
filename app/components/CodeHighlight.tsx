@@ -41,7 +41,27 @@ const Checkmark = () => (
   </svg>
 );
 
-export default function CodeHighlight({ content }: { content: string }) {
+export default function CodeHighlight({
+  content,
+  showEditor = false,
+  setShowEditor,
+  set_html_arg,
+  set_css_arg,
+  set_js_arg,
+  args,
+}: {
+  content: string;
+  showEditor: boolean;
+  setShowEditor: (x: boolean) => void;
+  set_html_arg: (x: string) => void;
+  set_css_arg: (x: string) => void;
+  set_js_arg: (x: string) => void;
+  args: {
+    html: string;
+    css: string;
+    js: string;
+  };
+}) {
   const [copied, setCopied] = useState(false);
 
   return (
@@ -49,14 +69,18 @@ export default function CodeHighlight({ content }: { content: string }) {
       <div className="flex justify-between px-4 py-1 text-white text-xs items-center">
         <p className="text-sm">Example code</p>
         <div className="flex gap-4">
-          <Link
-            href="/sandbox"
-            target="_blank"
-            className="py-1 inline-flex items-center no-underline text-sm gap-1"
+          <div
+            className="py-1 inline-flex items-center no-underline text-sm gap-1 cursor-pointer"
+            onClick={() => {
+              setShowEditor(!showEditor);
+              set_html_arg(args["html"]);
+              set_css_arg(args["css"]);
+              set_js_arg(args["js"]);
+            }}
           >
             <ExternalLink />
             <p>Sandbox</p>
-          </Link>
+          </div>
           {!copied ? (
             <button
               className="py-1 inline-flex items-center gap-1"

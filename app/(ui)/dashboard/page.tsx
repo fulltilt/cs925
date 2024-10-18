@@ -16,6 +16,7 @@ import {
   Server,
   Globe,
   CheckCircle,
+  NotepadText,
 } from "lucide-react";
 
 export default function TableOfContents() {
@@ -32,23 +33,69 @@ export default function TableOfContents() {
         { module: "Introduction to HTML", url: "/foundations/html" },
         { module: "Introduction to CSS", url: "/foundations/css" },
         { module: "Introduction to JavaScript", url: "/foundations/js" },
-        { module: "Exercises", url: "/foundations/exercises" },
+        {
+          module: "Exercise: replicating landing pages",
+          url: "/foundations/exercises",
+        },
       ],
       progress: 0,
     },
     {
-      title: "Front-End Development (In Progress)",
+      title: "JavaScript (In Progress)",
       icon: <Layout className="h-5 w-5" />,
       lessons: [
-        { module: "Asynchronous JavaScript", url: "/frontend/js/async" },
-        { module: "Common JavaScript APIs", url: "#" },
-        { module: "Event Handlers", url: "#" },
-        { module: "JavaScript DOM Manipulation", url: "#" },
-        { module: "Promises", url: "#" },
-        { module: "Basic Reconciliation", url: "#" },
-        { module: "Responsive Web Design", url: "#" },
-        { module: "Introduction to React", url: "#" },
-        { module: "State Management in React", url: "#" },
+        { module: "Asynchronous JavaScript (NEW)", url: "/frontend/js/async" },
+        { module: "Map, Filter and Reduce", url: "/frontend/js/arrayf" },
+        { module: "Event Handlers", url: "/frontend/js/events" },
+        { module: "JavaScript DOM Manipulation", url: "/frontend/js/dom" },
+        {
+          module: "Exercise: TODO app in vanilla JavaScript",
+          url: "/frontend/js/exercise",
+        },
+        { module: "Error Handling", url: "/frontend/js/error" },
+        { module: "Promises", url: "/frontend/js/promises" },
+        { module: "TypeScript", url: "/misc/typescript" },
+        {
+          module: "Basic Reconciliation (Optional)",
+          url: "/frontend/js/reconciliation",
+        },
+      ],
+      progress: 0,
+    },
+    {
+      title: "React (In Progress)",
+      icon: <Layout className="h-5 w-5" />,
+      lessons: [
+        { module: "Introduction to React", url: "/react" },
+        { module: "State Management in React", url: "/react/state" },
+
+        { module: "Handling Form Data", url: "/react/forms" },
+        {
+          module: "Form Validation with Zod and React Hook Form",
+          url: "/react/zodhookform",
+        },
+        {
+          module: "Reconciliation in React (Optional)",
+          url: "/react/reconciliation",
+        },
+        { module: "Older Versions of React (Optional)", url: "/react/old" },
+      ],
+      progress: 0,
+    },
+    // https://www.youtube.com/watch?v=NJGLR5gl6m4
+    {
+      title: "User Experience (UX) (In Progress)",
+      icon: <Layout className="h-5 w-5" />,
+      lessons: [
+        { module: "UX Basics", url: "/ux/basics" },
+        { module: "Flexbox Layout", url: "/ux/flexbox" },
+        { module: "Grid Layout", url: "/ux/grid" },
+        { module: "Responsive Web Design", url: "/ux/responsive" },
+        { module: "Typography", url: "/ux/" },
+        { module: "Colors", url: "/ux/" },
+        { module: "Images", url: "/ux/" },
+        { module: "Content", url: "/ux/" },
+        { module: "Tailwind for Styling", url: "#" },
       ],
       progress: 0,
     },
@@ -56,7 +103,7 @@ export default function TableOfContents() {
       title: "Back-End Development (Upcoming)",
       icon: <Server className="h-5 w-5" />,
       lessons: [
-        { module: "Introduction to Node.js", url: "/backend/node-intro" },
+        { module: "Introduction to Node.js (NEW)", url: "/backend/node-intro" },
         { module: "Express.js Fundamentals", url: "#" },
         { module: "RESTful API Design", url: "#" },
         { module: "Authentication and Authorization", url: "#" },
@@ -80,16 +127,16 @@ export default function TableOfContents() {
       title: "Misc Topics (In Progress)",
       icon: <Code className="h-5 w-5" />,
       lessons: [
-        { module: "User Experience (UX) Basics", url: "/ux/basics" },
         { module: "Directory Paths and Navigation", url: "/shell/paths" },
+        { module: "Data Validation with Zod", url: "/misc/why-zod" },
+        { module: "Zod Basics", url: "/misc/zod" },
         { module: "Version Control with Git", url: "#" },
-        { module: "TypeScript", url: "#" },
+        { module: "Regex", url: "/misc/regex" },
         { module: "Public/Private Key Encryption", url: "#" },
         { module: "Authentication Using JSON Web Tokens (JWTs)", url: "#" },
         { module: "Deploying Your App to the Cloud", url: "#" },
         { module: "Setting up a Domain", url: "#" },
-        { module: "Zod for Form Validation", url: "#" },
-        { module: "Tailwind for Styling", url: "#" },
+
         // { module: "Web Security Best Practices", url: "#" },
         // { module: "Performance Optimization", url: "#" },
         // { module: "Deployment and DevOps", url: "#" },
@@ -125,6 +172,15 @@ export default function TableOfContents() {
               Introduction
             </Link>
           </div>
+          <div className="flex gap-2 mt-4">
+            <NotepadText className="h-5 w-5" />
+            <Link
+              href="/notes"
+              className="text-sm no-underline hover:underline"
+            >
+              Notes
+            </Link>
+          </div>
           <Accordion
             type="multiple"
             className="w-full"
@@ -134,6 +190,8 @@ export default function TableOfContents() {
               "section-2",
               "section-3",
               "section-4",
+              "section-5",
+              "section-6",
             ]}
           >
             {courseSections.map((section, index) => (

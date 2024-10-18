@@ -68,8 +68,8 @@ export default function Intro() {
       <NavigationLinks
         prevLesson={null}
         nextLesson={{
-          slug: "/foundations/webdev",
-          title: "What Is Web Development?",
+          slug: "/notes",
+          title: "Notes",
         }}
       />
     </div>

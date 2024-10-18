@@ -1,6 +1,7 @@
 "use client";
 
 import { ExternalLink } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { atomOneDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
@@ -53,6 +54,7 @@ export default function CodeHighlight({
     js: "",
   },
   sandboxOption = true,
+  externalSandboxUrl = null,
 }: {
   content: string;
   showEditor?: boolean;
@@ -66,6 +68,7 @@ export default function CodeHighlight({
     js: string;
   };
   sandboxOption?: boolean;
+  externalSandboxUrl?: string | null;
 }) {
   const [copied, setCopied] = useState(false);
 
@@ -87,6 +90,16 @@ export default function CodeHighlight({
               <ExternalLink />
               <p>Sandbox</p>
             </div>
+          )}
+          {externalSandboxUrl && (
+            <Link
+              className="py-1 inline-flex items-center no-underline text-sm gap-1 cursor-pointer"
+              href={externalSandboxUrl}
+              target="_blank"
+            >
+              <ExternalLink />
+              <p>Sandbox</p>
+            </Link>
           )}
           {!copied ? (
             <button

@@ -109,8 +109,8 @@ export default function WebDev() {
       </p>
       <NavigationLinks
         prevLesson={{
-          slug: "/intro",
-          title: "Introduction",
+          slug: "/notes",
+          title: "Notes",
         }}
         nextLesson={{
           slug: "/foundations/devenv",

@@ -8,7 +8,15 @@ export default function () {
         The modules in this course serve as to give you a brief overview of a
         particular topic and we branch off from there in more specific modules.
         You can read each module one after the next but the real learning is
-        being hands on and experimenting and playing around with the code.
+        being hands on and doing the exercises/projects and experimenting and
+        playing around with the code.
+      </p>
+      <p>
+        Ultimately, all of these small projects will be building blocks for you
+        to build your own projects and that's where the most learning will be.
+        It's one thing to follow along a multi-hour tutorial and mimicing the
+        instructor but it's another thing when you're building something from
+        scratch.
       </p>
       <p>
         For the simpler examples, you can access the built-in code editor by
@@ -30,7 +38,9 @@ export default function () {
       <p>
         For the technologies used, we will use tools that are free so don&apos;t
         expect to have to pay anything outside of the monthly membership if you
-        are subscribed.
+        are subscribed. The one exception I can think of is when setting up a
+        domain which can't be avoided. Fortunately, the cost for registering a
+        domain can be as low as $10.
       </p>
       <NavigationLinks
         prevLesson={{

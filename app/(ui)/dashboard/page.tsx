@@ -136,12 +136,12 @@ export default function TableOfContents() {
         { module: "Zod Basics", url: "/misc/zod" },
         { module: "Version Control with Git", url: "/misc/git" },
         { module: "Regex", url: "/misc/regex" },
-        { module: "Public/Private Key Encryption", url: "/misc/encrypt" },
+        { module: "Public/Private Key Encryption", url: "/misc/keyencrypt" },
         {
           module: "Authentication Using JSON Web Tokens (JWTs)",
           url: "/misc/jwt",
         },
-        { module: "Deploying Your App to the Cloud", url: "/misc/clound" },
+        { module: "Deploying Your App to the Cloud (Upcoming)", url: "#" },
         { module: "Setting up a Domain", url: "/misc/domain" },
 
         // { module: "Web Security Best Practices", url: "#" },

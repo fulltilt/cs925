@@ -27,6 +27,11 @@ export default function () {
         information there is out there and more importantly, the more likely
         someone has run into the same issues that you'll run into.
       </p>
+      <p>
+        For the technologies used, we will use tools that are free so don&apos;t
+        expect to have to pay anything outside of the monthly membership if you
+        are subscribed.
+      </p>
       <NavigationLinks
         prevLesson={{
           slug: "/intro",

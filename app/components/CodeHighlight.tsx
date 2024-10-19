@@ -73,7 +73,7 @@ export default function CodeHighlight({
   const [copied, setCopied] = useState(false);
 
   return (
-    <div className="max-w-2xl min-w-[25rem] bg-[#3a404d] rounded-md overflow-hidden">
+    <div className="max-w-2xl min-w-[25rem] bg-[#3a404d] rounded-md overflow-hidden my-4">
       <div className="flex justify-between px-4 py-1 text-white text-xs items-center">
         <p className="text-sm">Example code</p>
         <div className="flex gap-4">

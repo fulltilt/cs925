@@ -12,6 +12,7 @@ import {
 } from "@/server/db/queries";
 import { auth } from "@/app/api/auth/authConfig";
 import { z } from "zod";
+import { roundToTwoDecimals } from "@/lib/utils";
 
 export const courseDataSchema = z.array(
   z.object({
@@ -31,6 +32,9 @@ export default async function TableOfContents() {
   const completed = await getCompletedCourses(session?.user.email ?? "");
   const courseData = (await getCourseData()) as CourseData;
 
+  // update users completed modules count for every course
+  completed.forEach((module) => counts[module.course_id].count++);
+
   const sections = courseData.reduce((courses, current) => {
     if (courses[current.course_id] === undefined) {
       const newCourse = {} as any;
@@ -40,6 +44,7 @@ export default async function TableOfContents() {
       courses[current.course_id] = newCourse;
     }
     courses[current.course_id].modules.push({
+      id: current.module_id,
       name: current.module_name,
       url: current.path,
     });
@@ -47,11 +52,14 @@ export default async function TableOfContents() {
     return courses;
   }, {} as any);
 
-  // { module: "Web Security Best Practices", url: "/misc/security" },
-  // { module: "Performance Optimization", url: "/misc/performance" },
-  // { module: "Deployment and DevOps", url: "/misc/devops" },
-  // { module: "Microservices Architecture", url: "/misc/microservices" },
-  // { module: "Serverless Computing", url: "/misc/serverless" },
+  const overallCounts = Object.values(counts).reduce(
+    (totals, current) => {
+      totals["modules"] += parseInt(current["total_modules"]);
+      totals["completed"] += current["count"];
+      return totals;
+    },
+    { modules: 0, completed: 0 }
+  );
 
   return (
     <div className="flex flex-col min-h-screen mx-4">
@@ -65,8 +73,18 @@ export default async function TableOfContents() {
               <CardTitle>Course Progress</CardTitle>
             </CardHeader>
             <CardContent>
-              <Progress value={0} className="w-full" />
-              <p className="text-sm text-gray-500 mt-2">0% Complete</p>
+              <Progress
+                value={
+                  (overallCounts["completed"] / overallCounts["modules"]) * 100
+                }
+                className="w-full"
+              />
+              <p className="text-sm text-gray-500 mt-2">
+                {roundToTwoDecimals(
+                  (overallCounts["completed"] / overallCounts["modules"]) * 100
+                )}
+                % Complete
+              </p>
             </CardContent>
           </Card>
           <div className="flex gap-2">
@@ -102,7 +120,16 @@ export default async function TableOfContents() {
           >
             {Object.values(sections).map((section, index) => (
               <Suspense key={index} fallback={<p>Loading...</p>}>
-                <Module section={section} index={index} />
+                <Module
+                  section={section}
+                  index={index}
+                  completedCourses={completed.map((c) => c.module_id)}
+                  progress={roundToTwoDecimals(
+                    (counts[section.id].count /
+                      parseInt(counts[section.id].total_modules)) *
+                      100
+                  )}
+                />
               </Suspense>
             ))}
           </Accordion>
@@ -111,3 +138,9 @@ export default async function TableOfContents() {
     </div>
   );
 }
+
+// { module: "Web Security Best Practices", url: "/misc/security" },
+// { module: "Performance Optimization", url: "/misc/performance" },
+// { module: "Deployment and DevOps", url: "/misc/devops" },
+// { module: "Microservices Architecture", url: "/misc/microservices" },
+// { module: "Serverless Computing", url: "/misc/serverless" },

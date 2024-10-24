@@ -8,14 +8,21 @@ export async function getCourseCounts() {
   return new Promise(async (resolve, reject) => {
     try {
       const res = await db.execute(sql`
-            SELECT c.name, COUNT(*)
+            SELECT c.id, c.name, COUNT(*) AS total_modules
             FROM cs925_course c, cs925_module m
             WHERE c.id = m.course_id
             GROUP BY c.id
         `);
 
-      console.log(res.rows);
-      resolve(res.rows);
+      //   console.log(res.rows);
+      resolve(
+        res.rows
+          .map((row) => ({ ...row, count: 0 }))
+          .reduce((courses, current) => {
+            courses[current.id] = { ...current };
+            return courses;
+          }, {})
+      );
     } catch (e) {
       console.log(e);
       reject(e);
@@ -44,7 +51,7 @@ export async function getCompletedCourses(email: string) {
         WHERE u.email = ${email};
     `);
 
-      console.log(res.rows);
+      //   console.log(res.rows);
       resolve(res.rows);
     } catch (e) {
       console.log(e);
@@ -63,7 +70,7 @@ export async function getCourseData() {
             INNER JOIN cs925_module m ON c.id = m.course_id;
         `);
 
-      console.log(res.rows);
+      //   console.log(res.rows);
       resolve(res.rows);
     } catch (e) {
       console.log(e);

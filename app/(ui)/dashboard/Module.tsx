@@ -44,11 +44,14 @@ const icons = {
 export default function Module({
   section,
   index,
+  completedCourses,
+  progress,
 }: {
   section: ModuleType;
   index: number;
+  completedCourses: string[];
+  progress: number;
 }) {
-  console.log(section);
   return (
     <AccordionItem value={`section-${index}`} key={index}>
       <AccordionTrigger className="hover:no-underline">
@@ -63,7 +66,7 @@ export default function Module({
             <li key={lessonIndex} className="flex items-center">
               <CheckCircle
                 className={`h-4 w-4 mr-2 ${
-                  section.progress > lessonIndex * 20
+                  completedCourses.includes(lesson.id)
                     ? "text-green-500"
                     : "text-gray-300"
                 }`}
@@ -78,10 +81,8 @@ export default function Module({
           ))}
         </ul>
         <div className="mt-4">
-          <Progress value={section.progress} className="w-full" />
-          <p className="text-sm text-gray-500 mt-2">
-            {section.progress}% Complete
-          </p>
+          <Progress value={progress} className="w-full" />
+          <p className="text-sm text-gray-500 mt-2">{progress}% Complete</p>
         </div>
       </AccordionContent>
     </AccordionItem>

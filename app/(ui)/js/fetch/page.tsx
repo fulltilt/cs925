@@ -329,6 +329,15 @@ fetch('https://api.example.com/data')
           allows you to build dynamic web applications that can communicate with
           servers, load data asynchronously, and update the UI seamlessly.
         </p>
+        <hr />
+        <h2>Exercises</h2>
+        <ol>
+          <li>
+            Using URL <code>https://jsonplaceholder.typicode.com/todos</code>,
+            fetch all the todos and then display all the todos that are not
+            completed.
+          </li>
+        </ol>
       </div>
       <AnimatePresence>
         {showEditor && (

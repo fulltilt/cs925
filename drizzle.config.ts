@@ -5,8 +5,7 @@ export default {
   dialect: "postgresql",
   dbCredentials: {
     // url: process.env.POSTGRES_URL,
-    url: "postgres://default:t8fkzQ7rqAgE@ep-crimson-unit-a62twnxk-pooler.us-west-2.aws.neon.tech:5432/verceldb?sslmode=require",
+    url: "postgresql://ai-short-video-generator_owner:X0OoSauM8FQR@ep-floral-feather-a6tvf95y.us-west-2.aws.neon.tech/ai-short-video-generator?sslmode=require",
   },
-  //   tablesFilter: ["poketrades_*"],
   tablesFilter: ["cs925_*"],
 }; // satisfies Config;

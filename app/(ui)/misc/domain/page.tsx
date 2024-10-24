@@ -98,8 +98,8 @@ export default function SettingUpDomain() {
       <hr />
       <h2>3. Setting Up DNS Records</h2>
       <p>
-        Once you’ve registered your domain, it’s time to configure your{" "}
-        <strong>DNS settings</strong>:
+        Once you&apos;ve registered your domain, it&apos;s time to configure
+        your <strong>DNS settings</strong>:
       </p>
       <ol>
         <li>
@@ -206,15 +206,16 @@ export default function SettingUpDomain() {
       <hr />
       <h2>6. Conclusion</h2>
       <p>
-        With these steps, you’ve successfully registered a domain on Cloudflare
-        and configured it for use with DNS and SSL/TLS. Using Cloudflare&#39;s
-        services provides benefits like improved performance, enhanced security,
-        and easier management of your domain&#39;s DNS settings.
+        With these steps, you&apos;ve successfully registered a domain on
+        Cloudflare and configured it for use with DNS and SSL/TLS. Using
+        Cloudflare&#39;s services provides benefits like improved performance,
+        enhanced security, and easier management of your domain&#39;s DNS
+        settings.
       </p>
       <p>
         Cloudflare also offers many advanced features like{" "}
         <strong>DDoS protection</strong>, <strong>Page Rules</strong>, and{" "}
-        <strong>caching</strong> that can further optimize your website’s
+        <strong>caching</strong> that can further optimize your website&apos;s
         performance. You can explore these options from the{" "}
         <strong>Dashboard</strong> after setting up your domain.
       </p>

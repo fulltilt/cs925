@@ -1,6 +1,6 @@
 import CodeHighlight from "@/app/components/CodeHighlight";
 
-export default function () {
+export default function ErrorHandling() {
   return (
     <div className="flex max-w-[75ch] mx-4 sm:mx-auto flex-col gap-4 empty:hidden first:pt-[3px] lesson">
       <h1>Error Handling</h1>

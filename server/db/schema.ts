@@ -104,3 +104,29 @@ export const authenticators = createTable(
     }),
   })
 );
+
+export const course = createTable("course", {
+  id: serial("id").notNull().primaryKey(),
+  name: text("name").notNull(),
+  module_count: integer("module_count").default(0),
+});
+
+export const module = createTable("module", {
+  id: text("id").notNull().primaryKey(),
+  path: text("path").notNull(),
+  name: text("name").notNull(),
+  courseId: integer("course_id")
+    .notNull()
+    .references(() => course.id, { onDelete: "cascade" }),
+});
+
+export const moduleStatus = createTable("module_status", {
+  id: serial("id").primaryKey(),
+  moduleId: text("module_id")
+    .notNull()
+    .references(() => module.id, { onDelete: "cascade" }),
+  userId: text("user_id")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade" }),
+  complete: boolean("complete").default(false),
+});

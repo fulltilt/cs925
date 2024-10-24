@@ -1,158 +1,57 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { Suspense } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import { Accordion } from "@/components/ui/accordion";
 import { Progress } from "@/components/ui/progress";
+import { BookOpen, NotepadText } from "lucide-react";
+import Module from "./Module";
 import {
-  BookOpen,
-  Code,
-  Layout,
-  Database,
-  Server,
-  Globe,
-  CheckCircle,
-  NotepadText,
-} from "lucide-react";
+  getCompletedCourses,
+  getCourseCounts,
+  getCourseData,
+} from "@/server/db/queries";
+import { auth } from "@/app/api/auth/authConfig";
+import { z } from "zod";
 
-export default function TableOfContents() {
-  const courseSections = [
-    {
-      title: "Foundations",
-      icon: <Globe className="h-5 w-5" />,
-      lessons: [
-        { module: "What is Web Development?", url: "/foundations/webdev" },
-        {
-          module: "Setting Up Your Development Environment",
-          url: "/foundations/devenv",
-        },
-        { module: "Introduction to HTML", url: "/foundations/html" },
-        { module: "Introduction to CSS", url: "/foundations/css" },
-        { module: "Introduction to JavaScript", url: "/foundations/js" },
-        {
-          module: "Exercise: replicating landing pages",
-          url: "/foundations/exercises",
-        },
-      ],
-      progress: 0,
-    },
-    {
-      title: "JavaScript (In Progress)",
-      icon: <Layout className="h-5 w-5" />,
-      lessons: [
-        { module: "Asynchronous JavaScript (NEW)", url: "/frontend/js/async" },
-        { module: "Map, Filter and Reduce", url: "/frontend/js/arrayf" },
-        { module: "Event Handlers", url: "/frontend/js/events" },
-        { module: "JavaScript DOM Manipulation", url: "/frontend/js/dom" },
-        {
-          module: "Exercise: TODO app in vanilla JavaScript",
-          url: "/frontend/js/exercise",
-        },
-        { module: "Error Handling", url: "/frontend/js/error" },
-        { module: "Promises", url: "/frontend/js/promises" },
-        { module: "Fetch", url: "/frontend/js/fetch" },
-        { module: "TypeScript", url: "/misc/typescript" },
-        {
-          module: "Basic Reconciliation (Optional)",
-          url: "/frontend/js/reconciliation",
-        },
-      ],
-      progress: 0,
-    },
-    {
-      title: "React (In Progress)",
-      icon: <Layout className="h-5 w-5" />,
-      lessons: [
-        { module: "Introduction to React", url: "/react" },
-        { module: "State Management in React", url: "/react/state" },
+export const courseDataSchema = z.array(
+  z.object({
+    course_id: z.number(),
+    course_name: z.string(),
+    module_id: z.string(),
+    path: z.string(),
+    module_name: z.string(),
+  })
+);
 
-        { module: "Handling Form Data", url: "/react/forms" },
-        {
-          module: "Form Validation with Zod and React Hook Form",
-          url: "/react/zodhookform",
-        },
-        {
-          module: "Reconciliation in React (Optional)",
-          url: "/react/reconciliation",
-        },
-        { module: "Older Versions of React (Optional)", url: "/react/old" },
-      ],
-      progress: 0,
-    },
-    // https://www.youtube.com/watch?v=NJGLR5gl6m4
-    {
-      title: "User Experience (UX) (In Progress)",
-      icon: <Layout className="h-5 w-5" />,
-      lessons: [
-        { module: "UX Basics", url: "/ux/basics" },
-        { module: "Flexbox Layout", url: "/ux/flexbox" },
-        { module: "Grid Layout", url: "/ux/grid" },
-        { module: "Responsive Web Design", url: "/ux/responsive" },
-        { module: "Typography", url: "/ux/typography" },
-        { module: "Colors", url: "/ux/colors" },
-        { module: "Images", url: "/ux/images" },
-        { module: "Content", url: "/ux/content" },
-        { module: "Tailwind", url: "/ux/tailwind" },
-      ],
-      progress: 0,
-    },
-    {
-      title: "Back-End Development (Upcoming)",
-      icon: <Server className="h-5 w-5" />,
-      lessons: [
-        { module: "Introduction to Node.js (NEW)", url: "/backend/node-intro" },
-        { module: "Express.js Fundamentals", url: "/backend/express" },
-        { module: "RESTful API Design", url: "/backend/rest" },
-        { module: "Authentication and Authorization", url: "/backend/auth" },
-        {
-          module: "Database Integration",
-          url: "/backend/db",
-        },
-      ],
-      progress: 0,
-    },
-    {
-      title: "Database Management (Upcoming)",
-      icon: <Database className="h-5 w-5" />,
-      lessons: [
-        { module: "Introduction to Databases", url: "/db" },
-        { module: "SQL Fundamentals", url: "/db/sql" },
-        { module: "NoSQL Databases", url: "/db/nosql" },
-        { module: "Database Design Principles", url: "/db/design" },
-        { module: "Data Modeling and Normalization", url: "/db/models" },
-      ],
-      progress: 0,
-    },
-    {
-      title: "Misc Topics (In Progress)",
-      icon: <Code className="h-5 w-5" />,
-      lessons: [
-        { module: "Directory Paths and Navigation", url: "/shell/paths" },
-        { module: "Data Validation with Zod", url: "/misc/why-zod" },
-        { module: "Zod Basics", url: "/misc/zod" },
-        { module: "Version Control with Git", url: "/misc/git" },
-        { module: "Regex", url: "/misc/regex" },
-        { module: "Public/Private Key Encryption", url: "/misc/keyencrypt" },
-        {
-          module: "Authentication Using JSON Web Tokens (JWTs)",
-          url: "/misc/jwt",
-        },
-        { module: "Deploying Your App to the Cloud (Upcoming)", url: "#" },
-        { module: "Setting up a Domain", url: "/misc/domain" },
+type CourseData = z.infer<typeof courseDataSchema>;
 
-        // { module: "Web Security Best Practices", url: "#" },
-        // { module: "Performance Optimization", url: "#" },
-        // { module: "Deployment and DevOps", url: "#" },
-        // { module: "Microservices Architecture", url: "#" },
-        // { module: "Serverless Computing", url: "#" },
-      ],
-      progress: 0,
-    },
-  ];
+export default async function TableOfContents() {
+  const session = await auth();
+  const counts = await getCourseCounts();
+  const completed = await getCompletedCourses(session?.user.email ?? "");
+  const courseData = (await getCourseData()) as CourseData;
+
+  const sections = courseData.reduce((courses, current) => {
+    if (courses[current.course_id] === undefined) {
+      const newCourse = {} as any;
+      newCourse.id = current.course_id;
+      newCourse.title = current.course_name;
+      newCourse.modules = [];
+      courses[current.course_id] = newCourse;
+    }
+    courses[current.course_id].modules.push({
+      name: current.module_name,
+      url: current.path,
+    });
+
+    return courses;
+  }, {} as any);
+
+  // { module: "Web Security Best Practices", url: "/misc/security" },
+  // { module: "Performance Optimization", url: "/misc/performance" },
+  // { module: "Deployment and DevOps", url: "/misc/devops" },
+  // { module: "Microservices Architecture", url: "/misc/microservices" },
+  // { module: "Serverless Computing", url: "/misc/serverless" },
 
   return (
     <div className="flex flex-col min-h-screen mx-4">
@@ -201,42 +100,10 @@ export default function TableOfContents() {
               "section-6",
             ]}
           >
-            {courseSections.map((section, index) => (
-              <AccordionItem value={`section-${index}`} key={index}>
-                <AccordionTrigger className="hover:no-underline">
-                  <div className="flex items-center">
-                    {section.icon}
-                    <span className="ml-2">{section.title}</span>
-                  </div>
-                </AccordionTrigger>
-                <AccordionContent>
-                  <ul className="space-y-2">
-                    {section.lessons.map((lesson, lessonIndex) => (
-                      <li key={lessonIndex} className="flex items-center">
-                        <CheckCircle
-                          className={`h-4 w-4 mr-2 ${
-                            section.progress > lessonIndex * 20
-                              ? "text-green-500"
-                              : "text-gray-300"
-                          }`}
-                        />
-                        <Link
-                          href={lesson.url}
-                          className="text-sm no-underline hover:underline"
-                        >
-                          {lesson.module}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="mt-4">
-                    <Progress value={section.progress} className="w-full" />
-                    <p className="text-sm text-gray-500 mt-2">
-                      {section.progress}% Complete
-                    </p>
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
+            {Object.values(sections).map((section, index) => (
+              <Suspense key={index} fallback={<p>Loading...</p>}>
+                <Module section={section} index={index} />
+              </Suspense>
             ))}
           </Accordion>
         </div>

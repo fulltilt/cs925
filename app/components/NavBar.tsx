@@ -55,7 +55,7 @@ export async function NavBar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 flex w-full items-center justify-between p-2 pl-4 pr-4 text-xl font-semibold bg-white dark:bg-slate-900">
+    <nav className="sticky top-0 z-50 flex w-full items-center justify-between p-2 pl-4 pr-4 text-xl font-semibold bg-white dark:bg-slate-900 shadow-md">
       <div className="flex items-center gap-8">
         <Link
           className="flex items-center justify-center no-underline"

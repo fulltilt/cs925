@@ -42,6 +42,11 @@ export default function () {
         domain which can't be avoided. Fortunately, the cost for registering a
         domain can be as low as $10.
       </p>
+      <p>
+        The site is still relatively new and we plan on adding more content as
+        time goes on but in the meantime, there is more than enough content to
+        keep you busy for a long time, especially if you are new.
+      </p>
       <NavigationLinks
         prevLesson={{
           slug: "/intro",

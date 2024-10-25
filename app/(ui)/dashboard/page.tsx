@@ -77,7 +77,7 @@ export default async function TableOfContents() {
                 value={
                   (overallCounts["completed"] / overallCounts["modules"]) * 100
                 }
-                className="w-full"
+                className="w-full [&>*]:bg-green-500"
               />
               <p className="text-sm text-gray-500 mt-2">
                 {roundToTwoDecimals(
@@ -123,7 +123,7 @@ export default async function TableOfContents() {
                 <Module
                   section={section}
                   index={index}
-                  completedCourses={completed.map((c) => c.module_id)}
+                  completedCourses={completed.map((c2) => c2.module_id)}
                   progress={roundToTwoDecimals(
                     (counts[section.id].count /
                       parseInt(counts[section.id].total_modules)) *

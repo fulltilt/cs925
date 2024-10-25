@@ -5,14 +5,10 @@ import {
 } from "@/components/ui/accordion";
 import { Progress } from "@/components/ui/progress";
 import {
-  BookOpen,
-  Code,
   Layout,
   Database,
-  Server,
   Globe,
   CheckCircle,
-  NotepadText,
   User,
   HardDrive,
   Barcode,
@@ -81,7 +77,7 @@ export default function Module({
           ))}
         </ul>
         <div className="mt-4">
-          <Progress value={progress} className="w-full" />
+          <Progress value={progress} className="w-full [&>*]:bg-green-500" />
           <p className="text-sm text-gray-500 mt-2">{progress}% Complete</p>
         </div>
       </AccordionContent>

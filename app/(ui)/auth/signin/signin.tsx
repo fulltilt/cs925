@@ -55,8 +55,8 @@ export default function SignInPage() {
         <CardHeader>
           <CardTitle className="text-center text-2xl">CS 925 Login</CardTitle>
           <CardDescription>
-            <p>Enter your email to receive a magic link.</p>
-            <p>(For new users, this will create a new account.)</p>
+            Enter your email to receive a magic link. (For new users, this will
+            create a new account.)
           </CardDescription>
         </CardHeader>
         <CardContent>

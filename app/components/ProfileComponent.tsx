@@ -97,12 +97,29 @@ const ProfileComponent = () => {
                   </AlertDialogCancel>
 
                   <AlertDialogAction className="sm:w-auto w-full">
-                    <Link
-                      href={process.env.NEXT_PUBLIC_STRIPE_CUSTOMER_PORTAL_URL!}
-                      className="no-underline"
+                    <Button
+                      onClick={async () => {
+                        try {
+                          const response = await fetch(
+                            "/api/create-billing-portal",
+                            {
+                              method: "POST",
+                            }
+                          );
+
+                          const { url } = await response.json();
+                          if (url) window.location.href = url;
+                          else
+                            throw new Error(
+                              "Failed to create Stripe billing portal"
+                            );
+                        } catch (e) {
+                          console.log(e);
+                        }
+                      }}
                     >
-                      Go to Stripe
-                    </Link>
+                      Go to Billing
+                    </Button>
                   </AlertDialogAction>
                 </AlertDialogFooter>
               </AlertDialogContent>

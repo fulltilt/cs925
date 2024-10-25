@@ -46,10 +46,7 @@ export async function NavBar() {
     const cancelDate = stripeData?.cancel_at;
 
     if (!user) return false;
-    if (
-      (stripeData !== null && cancelDate === undefined) ||
-      stripeData === "free"
-    )
+    if ((stripeData !== null && cancelDate === null) || stripeData === "free")
       return true; // User is logged in but there is no cancellation date on Stripe data
     return parseInt(cancelDate) * 1000 > new Date().valueOf();
   };
@@ -59,7 +56,7 @@ export async function NavBar() {
       <div className="flex items-center gap-8">
         <Link
           className="flex items-center justify-center no-underline"
-          href="/"
+          href={user ? "/dashboard" : "/"}
         >
           <Laptop className="h-6 w-6 text-blue-600" />
           <span className="ml-2 text-xl md:text-2xl font-bold ">CS 925</span>

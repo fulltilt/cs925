@@ -11,7 +11,6 @@ import {
   serial,
   text,
   timestamp,
-  varchar,
 } from "drizzle-orm/pg-core";
 // import type { AdapterAccountType } from "next-auth/adapters";
 
@@ -108,7 +107,6 @@ export const authenticators = createTable(
 export const course = createTable("course", {
   id: serial("id").notNull().primaryKey(),
   name: text("name").notNull(),
-  module_count: integer("module_count").default(0),
 });
 
 export const module = createTable("module", {

@@ -47,7 +47,7 @@ export default function () {
         time goes on but in the meantime, there is more than enough content to
         keep you busy for a long time, especially if you are new.
       </p>
-      <NavigationLinks
+      {/* <NavigationLinks
         prevLesson={{
           slug: "/intro",
           title: "Introduction",
@@ -56,7 +56,7 @@ export default function () {
           slug: "/foundations/webdev",
           title: "What Is Web Development?",
         }}
-      />
+      /> */}
     </div>
   );
 }

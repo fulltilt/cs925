@@ -17,6 +17,7 @@ const transporter = nodemailer.createTransport({
 });
 
 export async function sendMail(to: string, subject: string, html: string) {
+  console.log(to, subject, html);
   await transporter.sendMail({
     from: process.env.EMAIL_FROM, // sender address
     to, // list of receivers

@@ -9,6 +9,9 @@ import {
   verificationTokens,
 } from "@/server/db/schema";
 import { eq } from "drizzle-orm";
+import MagicLinkEmail from "@/emails/MagicLinkEmail";
+import { sendMail } from "@/server/db/queries";
+import { render } from "@react-email/components";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   debug: true,
@@ -40,6 +43,23 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         },
       },
       from: process.env.EMAIL_FROM,
+      async sendVerificationRequest(params) {
+        // this function allows you to customize the Magic Link email
+        const { identifier, url } = params;
+        const userEmail = identifier;
+
+        try {
+          const emailHtml = await render(<MagicLinkEmail url={url} />);
+
+          sendMail(
+            userEmail!,
+            "Here is your Magic Link for CS 925!",
+            emailHtml
+          );
+        } catch (e) {
+          console.log("error", e);
+        }
+      },
     }),
   ],
   callbacks: {

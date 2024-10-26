@@ -5,6 +5,9 @@ import { db } from "@/server/db";
 import { user } from "@/server/db/schema";
 import { eq, sql } from "drizzle-orm";
 import { NextApiRequest } from "next";
+import { render } from "@react-email/components";
+import WelcomeEmail from "@/emails/WelcomeEmail";
+import { sendMail } from "@/server/db/queries";
 
 const endpointSecret = process.env.STRIPE_ENDPOINT_SECRET!;
 
@@ -31,12 +34,23 @@ export async function POST(req: NextApiRequest) {
       case "checkout.session.completed": {
         const userId = event.data.object.metadata?.userId ?? "";
         const checkoutSession: Stripe.Checkout.Session = event.data.object;
-
+        // console.log("checkout.session.completed", event.data.object.metadata);
+        const { name, email } = checkoutSession.customer_details!;
+        console.log("name, email", name, email);
         try {
           await db
             .update(user)
             .set({ stripe_data: sql`${checkoutSession}::jsonb` })
             .where(eq(user.id, userId as string));
+
+          const emailHtml = await render(
+            <WelcomeEmail
+              name={name!}
+              url={`${process.env.NEXT_BASE_URL}/dashboard`}
+            />
+          );
+
+          sendMail(email!, "Welcome to CS 925!", emailHtml);
         } catch (error) {
           console.log(error);
           return Response.json({ error });
@@ -44,31 +58,31 @@ export async function POST(req: NextApiRequest) {
         break;
       }
 
-      case "customer.subscription.updated": {
-        const subscription = event.data.object;
-        const subscriptionId = subscription.id;
-        console.log("sub update", subscription);
+      // case "customer.subscription.updated": {
+      //   const subscription = event.data.object;
+      //   const subscriptionId = subscription.id;
+      //   // console.log("sub update", subscription);
 
-        try {
-          const res = await db.execute(sql`
-            SELECT * 
-            FROM cs925_user
-            WHERE (stripe_data->>'subscription')::text = ${subscriptionId} OR
-                  (stripe_data->>'id')::text = ${subscriptionId}
-          `);
-          const userId = res.rows[0].id;
+      //   try {
+      //     // const res = await db.execute(sql`
+      //     //   SELECT *
+      //     //   FROM cs925_user
+      //     //   WHERE (stripe_data->>'subscription')::text = ${subscriptionId} OR
+      //     //         (stripe_data->>'id')::text = ${subscriptionId}
+      //     // `);
+      //     // console.log("res.rows", res.rows[0]);
+      //     // const userId = res.rows[0].id;
+      //     // await db
+      //     //   .update(user)
+      //     //   .set({ stripe_data: sql`${subscription}::jsonb` })
+      //     //   .where(eq(user.id, userId as string));
+      //   } catch (error) {
+      //     console.log(error);
+      //     return Response.json({ error: error });
+      //   }
 
-          await db
-            .update(user)
-            .set({ stripe_data: sql`${subscription}::jsonb` })
-            .where(eq(user.id, userId as string));
-        } catch (error) {
-          console.log(error);
-          return Response.json({ error: error });
-        }
-
-        break;
-      }
+      //   break;
+      // }
       default:
         console.log(`Unhandled event type ${event.type}`);
     }

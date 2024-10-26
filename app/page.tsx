@@ -7,8 +7,8 @@ import { CheckCircle, Code, Brain, Rocket } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
-import { sendMail } from "./server/queries";
 import { SignInButton } from "./components/SignInButton";
+import { sendMail } from "@/server/db/queries";
 
 export default function LandingPage() {
   const { toast } = useToast();
@@ -195,8 +195,12 @@ export default function LandingPage() {
                   />
                   <Button
                     type="submit"
-                    onClick={() => {
-                      sendMail(email);
+                    onClick={async () => {
+                      sendMail(
+                        process.env.EMAIL_FROM!,
+                        "CS 925 Interest",
+                        email
+                      );
                       toast({
                         title: "Notification Sent!",
                         description: "Thank you for your interest!",

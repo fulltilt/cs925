@@ -5,9 +5,9 @@ import { cn } from "@/lib/utils";
 import { loadStripe } from "@stripe/stripe-js";
 import { LoaderCircle } from "lucide-react";
 import { useState } from "react";
-import { updateUser } from "../server/queries";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { updateUser } from "@/server/db/queries";
 
 const SubscribeComponent = ({ priceId }: { priceId: string }) => {
   const router = useRouter();

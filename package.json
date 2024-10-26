@@ -10,7 +10,8 @@
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
-    "db:studio": "drizzle-kit studio"
+    "db:studio": "drizzle-kit studio",
+    "email:dev": "email dev"
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^1.7.0",
@@ -28,6 +29,7 @@
     "@radix-ui/react-progress": "^1.1.0",
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-toast": "^1.2.2",
+    "@react-email/components": "0.0.25",
     "@stripe/stripe-js": "^4.8.0",
     "@uiw/react-codemirror": "^4.23.5",
     "@vercel/postgres": "^0.10.0",
@@ -59,6 +61,7 @@
     "eslint": "^8",
     "eslint-config-next": "14.2.13",
     "postcss": "^8",
+    "react-email": "3.0.1",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   }

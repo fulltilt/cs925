@@ -7,8 +7,8 @@ export default function ArrayF() {
     <ModuleWrapper>
       <div className="flex max-w-[75ch] mx-4 sm:mx-auto flex-col gap-4 empty:hidden first:pt-[3px] lesson">
         <h1>
-          Tutorial: JavaScript Array Methods - <code>map()</code>,{" "}
-          <code>filter()</code>, and <code>reduce()</code>
+          JavaScript Array Methods - <code>map()</code>, <code>filter()</code>,
+          and <code>reduce()</code>
         </h1>
         <p>
           JavaScript provides several powerful methods to work with arrays,

@@ -1,11 +1,20 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import NextAuth from "next-auth";
+import authConfig from "./app/api/auth/middleware/auth.config";
 
-export function middleware(request: NextRequest) {
-  // Add a new header x-current-path which passes the path to downstream components
-  // const headers = new Headers(request.headers);
-  // headers.set("x-current-path", request.nextUrl.pathname);
-  // return NextResponse.next({ headers });
+const auth = NextAuth(authConfig);
+
+export async function middleware(request: NextRequest) {
+  const user = await auth.auth();
+  console.log(user);
+  // if user isn't logged in and redirect them to / (corner cases are '/' and '/auth/signin')
+  if (
+    !user &&
+    request.nextUrl.pathname !== "/" &&
+    !request.nextUrl.pathname.startsWith("/auth")
+  )
+    return NextResponse.redirect(new URL("/", request.url));
 
   const response = NextResponse.next({
     request: {
@@ -13,6 +22,7 @@ export function middleware(request: NextRequest) {
     },
   });
 
+  // Add a new header x-current-path which passes the path to downstream components
   response.headers.set("x-current-path", request.nextUrl.pathname);
 
   return response;

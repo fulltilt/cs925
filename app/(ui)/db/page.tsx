@@ -5,7 +5,7 @@ export default function DB() {
   return (
     <ModuleWrapper>
       <div className="flex max-w-[75ch] mx-4 sm:mx-auto flex-col gap-4 empty:hidden first:pt-[3px] lesson">
-        <h1>Introductory Tutorial on Databases</h1>
+        <h1>Introduction to Databases</h1>
         <p>
           Databases are a fundamental part of software applications, allowing us
           to store, retrieve, and manipulate data efficiently. They are used in

@@ -136,7 +136,7 @@ export async function getModule(path: string): Promise<string> {
               FROM cs925_module
               WHERE path = ${path}
           `);
-      console.log("res getModule", res.rows[0].id);
+
       if (res.rows.length) resolve(res.rows[0].id);
       else resolve("");
     } catch (e) {

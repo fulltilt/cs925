@@ -3,7 +3,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle } from "lucide-react";
 import { SessionProvider } from "next-auth/react";
 
-export default function Subscribe() {
+export default function Subscribe({
+  searchParams,
+}: {
+  searchParams?: { notSubbed: string };
+}) {
+  console.log("searchParams", searchParams);
   return (
     <SessionProvider>
       <section
@@ -11,6 +16,12 @@ export default function Subscribe() {
         className="w-full py-12 md:py-24 lg:py-32 bg-[#f7f7f7] dark:bg-black"
       >
         <div className="container mx-auto px-4 md:px-6">
+          {searchParams?.notSubbed && (
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-center mb-12">
+              Hi! I see you tried to access premium content but unfortunately
+              you need to be subscribed to our Pro plan.
+            </h2>
+          )}
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-center mb-12">
             Simple, Transparent Pricing
           </h2>

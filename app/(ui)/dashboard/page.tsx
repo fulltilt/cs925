@@ -12,7 +12,7 @@ import {
 } from "@/server/db/queries";
 import { auth } from "@/app/api/auth/authConfig";
 import { z } from "zod";
-import { roundToTwoDecimals } from "@/lib/utils";
+import { customOrder, roundToTwoDecimals } from "@/lib/utils";
 
 export const courseDataSchema = z.array(
   z.object({
@@ -25,6 +25,87 @@ export const courseDataSchema = z.array(
 );
 
 type CourseData = z.infer<typeof courseDataSchema>;
+
+function orderSections(sections) {
+  // JavaScript
+  sections[2].modules.sort(
+    customOrder("url", [
+      "/js/arrayf",
+      "/js/dom",
+      "/js/exercise",
+      "/js/events",
+      "/js/async",
+      "/js/promises",
+      "/js/fetch",
+      "/js/errors",
+      "/js/typescript",
+      "/js/reconciliation",
+    ])
+  );
+
+  // React
+  sections[3].modules.sort(
+    customOrder("url", [
+      "/react",
+      "/react/state",
+      "/react/forms",
+      "/react/zodhookform",
+      "/react/reconciliation",
+      "/react/old",
+    ])
+  );
+
+  // UX
+  sections[4].modules.sort(
+    customOrder("url", [
+      "/ux/basics",
+      "/ux/flexbox",
+      "/ux/grid",
+      "/ux/responsive",
+      "/ux/colors",
+      "/ux/typography",
+      "/ux/images",
+      "/ux/content",
+      "/ux/tailwind",
+    ])
+  );
+
+  // backend
+  sections[5].modules.sort(
+    customOrder("url", [
+      "/backend/node-intro",
+      "/backend/express",
+      "/backend/rest",
+      "/backend/auth",
+      "/backend/db",
+    ])
+  );
+
+  // Database
+  sections[6].modules.sort(
+    customOrder("url", [
+      "/db",
+      "/db/sql",
+      "/db/nosql",
+      "/db/design",
+      "/db/models",
+    ])
+  );
+
+  // Misc
+  sections[7].modules.sort(
+    customOrder("url", [
+      "/shell/paths",
+      "/misc/git",
+      "/misc/zod",
+      "/misc/why-zod",
+      "/misc/keyencrypt",
+      "/misc/jwt",
+      "/misc/regex",
+      "/misc/domain",
+    ])
+  );
+}
 
 export default async function TableOfContents() {
   const session = await auth();
@@ -51,6 +132,7 @@ export default async function TableOfContents() {
 
     return courses;
   }, {} as any);
+  orderSections(sections);
 
   const overallCounts = Object.values(counts).reduce(
     (totals, current) => {

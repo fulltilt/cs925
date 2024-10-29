@@ -18,6 +18,7 @@ interface LessonNavigationProps {
     slug: string;
     title: string;
   } | null;
+  isSubscribedUser: boolean;
 }
 
 export default function NavigationLinks({
@@ -26,6 +27,7 @@ export default function NavigationLinks({
   status,
   prevLesson,
   nextLesson,
+  isSubscribedUser,
 }: LessonNavigationProps) {
   const [completeStatus, setCompleteStatus] = useState(status);
 
@@ -36,19 +38,21 @@ export default function NavigationLinks({
   return (
     <div className="mt-12">
       <div className="flex justify-center">
-        <Button
-          onClick={async () => {
-            const updateSuccessful = await setModuleUserStatus(
-              completeStatus,
-              user_id,
-              module_id
-            );
-            console.log("updateSuccessful", updateSuccessful);
-            if (updateSuccessful) setCompleteStatus(!completeStatus);
-          }}
-        >
-          {completeStatus ? "Mark as Not Complete" : "Mark as Complete"}
-        </Button>
+        {isSubscribedUser && (
+          <Button
+            onClick={async () => {
+              const updateSuccessful = await setModuleUserStatus(
+                completeStatus,
+                user_id,
+                module_id
+              );
+              console.log("updateSuccessful", updateSuccessful);
+              if (updateSuccessful) setCompleteStatus(!completeStatus);
+            }}
+          >
+            {completeStatus ? "Mark as Not Complete" : "Mark as Complete"}
+          </Button>
+        )}
       </div>
       <div className="mt-16 border-t pt-8">
         <nav className="flex justify-between">

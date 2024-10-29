@@ -6,6 +6,7 @@ import { NavBar } from "./components/NavBar";
 import { ThemeProvider } from "next-themes";
 import NextTopLoader from "nextjs-toploader";
 import { SessionProvider } from "next-auth/react";
+import { CSPostHogProvider } from "./_analytics/provider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -34,17 +35,19 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <SessionProvider>
-          <NextTopLoader />
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <NavBar />
-            <div>{children}</div>
-            <Toaster />
-          </ThemeProvider>
+          <CSPostHogProvider>
+            <NextTopLoader />
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <NavBar />
+              <div>{children}</div>
+              <Toaster />
+            </ThemeProvider>
+          </CSPostHogProvider>
         </SessionProvider>
       </body>
     </html>

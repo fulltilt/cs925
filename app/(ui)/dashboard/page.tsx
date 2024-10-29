@@ -13,6 +13,7 @@ import {
 import { auth } from "@/app/api/auth/authConfig";
 import { z } from "zod";
 import { customOrder, roundToTwoDecimals } from "@/lib/utils";
+import posthog from "posthog-js";
 
 export const courseDataSchema = z.array(
   z.object({
@@ -112,6 +113,7 @@ export default async function TableOfContents() {
   const counts = await getCourseCounts();
   const completed = await getCompletedCourses(session?.user.email ?? "");
   const courseData = (await getCourseData()) as CourseData;
+  posthog.capture("my event", { property: "value" });
 
   // update users completed modules count for every course
   completed.forEach((module) => counts[module.course_id].count++);
@@ -172,7 +174,7 @@ export default async function TableOfContents() {
           <div className="flex gap-2">
             <BookOpen className="h-5 w-5" />
             <Link
-              href="/intro"
+              href="/foundations/intro"
               className="text-sm no-underline hover:underline"
             >
               Introduction
@@ -181,7 +183,7 @@ export default async function TableOfContents() {
           <div className="flex gap-2 mt-4">
             <NotepadText className="h-5 w-5" />
             <Link
-              href="/notes"
+              href="/foundations/notes"
               className="text-sm no-underline hover:underline"
             >
               Notes

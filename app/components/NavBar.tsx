@@ -59,7 +59,7 @@ export async function NavBar() {
           href={user ? "/dashboard" : "/"}
         >
           <Laptop className="h-6 w-6 text-blue-600" />
-          <span className="ml-2 text-xl md:text-2xl font-bold ">CS 925</span>
+          <span className="ml-2 text-xl md:text-2xl font-bold ">CS925</span>
         </Link>
         {isValidUser() ? (
           <div className="hidden gap-8 sm:flex">

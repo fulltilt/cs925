@@ -28,10 +28,10 @@ export default function LandingPage() {
                 <p className="mx-auto max-w-[700px] text-sm md:text-xl text-white">
                   {/* Fun and engaging computer science classes for kids aged 7-14.
                   Build games, apps, and more! */}
-                  Learn the latest coding skills needed in today&apos;s market
-                  such as JavaScript, React, Next.js, SQL/NoSQL and Cloud as
-                  well as how to leverage AI to help you land your next job or
-                  build your next startup/business idea.
+                  Learn the latest web technoligies such as JavaScript, React,
+                  Next.js, SQL/NoSQL and Cloud as well as how to leverage AI to
+                  help you land your next job or build your next
+                  startup/business idea.
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
@@ -66,13 +66,8 @@ export default function LandingPage() {
               </div>
               <div className="flex flex-col items-center text-center">
                 <Brain className="h-12 w-12 text-purple-600 mb-4" />
-                <h3 className="text-xl font-bold mb-2">
-                  Develop Problem-Solving Skills
-                </h3>
-                <p>
-                  Enhance logical thinking and creativity through coding
-                  challenges.
-                </p>
+                <h3 className="text-xl font-bold mb-2">One-on-one coaching</h3>
+                <p>Get help from our instructors to guide you.</p>
               </div>
               <div className="flex flex-col items-center text-center">
                 <Rocket className="h-12 w-12 text-pink-600 mb-4" />

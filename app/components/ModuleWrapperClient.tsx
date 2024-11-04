@@ -32,7 +32,7 @@ export default function ModuleWrapper({ children }: { children: ReactNode }) {
       setStatus(status);
     }
   };
-  console.log("session", session);
+
   useEffect(() => {
     if (session?.user) init();
   }, [session]);

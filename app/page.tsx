@@ -67,7 +67,11 @@ export default function LandingPage() {
               <div className="flex flex-col items-center text-center">
                 <Brain className="h-12 w-12 text-purple-600 mb-4" />
                 <h3 className="text-xl font-bold mb-2">One-on-one coaching</h3>
-                <p>Get help from our instructors to guide you.</p>
+                <p>
+                  Get help from our instructors to guide you on a one-to-one
+                  basis which other sites do not offer outside of private
+                  coaching.
+                </p>
               </div>
               <div className="flex flex-col items-center text-center">
                 <Rocket className="h-12 w-12 text-pink-600 mb-4" />

@@ -61,3 +61,8 @@ module.exports = {
 };`
 
 - babel.config.js messes up prod but I need it for testing so removing that file from repo
+- https://stackoverflow.com/questions/57025753/how-to-set-initial-state-for-usestate-hook-in-jest-and-enzyme (mocking useState)
+- screen.debug();
+- logRoles(view.container) // where view is the rendered Component being tested
+- Testing Playground Chrome extension
+- https://www.youtube.com/watch?v=Z2lz6W12BCQ (I removed instrumentation setting)

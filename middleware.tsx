@@ -7,7 +7,7 @@ const auth = NextAuth(authConfig);
 
 export async function middleware(request: NextRequest) {
   const user = await auth.auth();
-  console.log(user);
+
   // if user isn't logged in and redirect them to / (corner cases are '/' and '/auth/signin')
   if (
     !user &&

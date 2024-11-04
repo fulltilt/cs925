@@ -8,7 +8,6 @@ export default function Subscribe({
 }: {
   searchParams?: { notSubbed: string };
 }) {
-  console.log("searchParams", searchParams);
   return (
     <SessionProvider>
       <section
@@ -43,7 +42,7 @@ export default function Subscribe({
                   "Q&A Support",
                   "No Contracts, Cancel Anytime",
                 ],
-                priceId: "price_1QAI17KzDxzEb95ORmz2kfPM",
+                priceId: `${process.env.CS925_PRICE_ID}`,
               },
             ].map((plan, index) => (
               <Card key={index} className="flex flex-col">
